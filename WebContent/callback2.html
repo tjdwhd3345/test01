@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jmnaverloginPop.html</title>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+  <div data-role="header" id="pHead">
+   <h1>WELCOME</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+   <p>WELCOME MAIN - NAVER LOGIN</p>
+   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+   <div id="naver_id_login" style="display: none;"></div>
+   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+   <!-- 네이버아디디로로그인 초기화 Script -->
+   <script type="text/javascript">
+    var naver_id_login = new naver_id_login("5CumGJVMJyZ2nBi_0uRn", "http://127.0.0.1:8080/test01/callback2.html");
+    /* var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2, 40);
+    naver_id_login.setDomain("192.168.0.2:8080/naver/");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login(); */
+   </script>
+   <!-- // 네이버아이디로로그인 초기화 Script -->
+   <!-- 네이버아디디로로그인 Callback페이지 처리 Script -->
+   <script type="text/javascript">
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+     // alert(naver_id_login.getProfileData('email'));
+     // alert(naver_id_login.getProfileData('nickname'));
+     
+     // 로그인 처리
+     $(opener.document).find("#naver_id_login").hide();
+     $(opener.document).find("#naver_id_logout").show();
+     
+     // 창닫기 및 로그인입력
+     $(opener.document).find("#dvLogin").empty();
+     $(opener.document).find("#dvLogin").append(naver_id_login.getProfileData('nickname') + "님 로그인"+"<br><br>");
+     $(opener.document).find("#dvLogin").append("프로필: "+naver_id_login.getProfileData('sns_profile')+"<br>");
+     $(opener.document).find("#dvLogin").append("성별: "+naver_id_login.getProfileData('gender')+"<br>");
+     $(opener.document).find("#dvLogin").append("생일: "+naver_id_login.getProfileData('birthday')+"<br>");
+     $(opener.document).find("#dvLogin").append("나이: "+naver_id_login.getProfileData('age')+"<br>");
+     $(opener.document).find("#dvLogin").append("이름: "+naver_id_login.getProfileData('name')+"<br>");
+     $(opener.document).find("#dvLogin").append("이메일: "+naver_id_login.getProfileData('email')+"<br>");
+     
+     window.close();
+    }
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+   </script>
+   <!-- //네이버아디디로로그인 Callback페이지 처리 Script -->
+   <div>
+   </div>
+  </div>
+</body>
+</html>
