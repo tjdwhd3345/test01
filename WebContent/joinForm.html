@@ -5,7 +5,7 @@
 
 <script>
 	$(function(){
-		<%-- EL표기로 msg를 받아서 alert로 표시한다. --%>
+		// EL표기로 msg를 받아서 alert로 표시한다. 
 		<c:if test="${!empty requestScope.msg}">
 			alert("${requestScope.msg}");
 			//alert('<spring:message code="signup.fail"/>');

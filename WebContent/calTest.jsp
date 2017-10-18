@@ -1,4 +1,4 @@
-<%@page import="java.util.Calendar"%>
+<%@ page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
     request.setCharacterEncoding("utf-8");
@@ -25,10 +25,7 @@
     int w = now.get(Calendar.DAY_OF_WEEK);    //1~7(일~토)
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP 만년달력</title>
         <style type="text/css">
             *{padding: 0px; margin: 0px;}  /* 브라우저별 기본 여백 차이가 있기에 작성한다. */
             body{font-size: 9pt;}
@@ -45,16 +42,12 @@
         	obj.setAttribute("bgcolor", "#FFFFFF");
         }
         </script>
-    </head>
-    <body>
-        <br/>&nbsp;<br/>
-        
             <table width="210" border="0" cellpadding="1" cellspacing="2">
                 <tr height="30">
                     <td align="center">
-                        <a href="calTest.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
+                        <a href="index.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
                         <b><%=year %>년 <%=month %>월</b>
-                        <a href="calTest.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
+                        <a href="index.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
                     </td>
                 </tr>
             </table>
@@ -104,5 +97,3 @@
                     out.println("</tr>");
                 %>
             </table>
-    </body>
-</html>

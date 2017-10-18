@@ -1,37 +1,63 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<title>joinForm.jsp</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+	//jQuery
 	$(function(){
 		var $formObj = $("form");
 		$($formObj).submit(function(){
 			var u = $($formObj).attr("action");
 			var m = $($formObj).attr("method");
-			var p = $($formObj).serialize();
+			var d = $($formObj).serialize();
 			var s = function(responseData){
-				$("#wrapper>section").empty();
-				$("#wrapper>section").html(responseData);
+				//$("#wrapper>section").empty();
+				//$("#wrapper>section").html(responseData);
+				var jsonObj=JSON.parse(responseData.trim());
+				alert(jsonObj.msg);
+				if(jsonObj.msg == "가입성공"){
+					console.log('aaaaaaaaaaaaa');
+					location.href="index.jsp";
+				}
 			}
-		$.ajax({
-       	 url: u,
-       	 method : m, 
-       	 data: p,
-       	 success : s
-       	 });
-    	return false;
-    	});
+			$.ajax({
+				url : u,
+				method : m,
+				data : d,
+				success : s
+			});
+			return false;
+		});
 	});
+
+	function p() {
+		var pwd = document.getElementById("pwd").value;
+		var pwd2 = document.getElementById("pwd2").value;
+		var pwdDiv = document.getElementById("pwdDiv");
+
+		if (pwd == pwd2) {
+			pwdDiv.innerHTML = "비밀번호가 일치합니다";
+			pwdDiv.setAttribute("class", "b");
+			pwdCheckFlag = true;
+		} else {
+			pwdDiv.innerHTML = "비밀번호 불일치";
+			pwdDiv.setAttribute("class", "a");
+			pwdCheckFlag = false;
+		}
+	}
 </script>
 
-<form method="post" action="">
-	이메일:<input name="email" type="email" value="aaa@bbb.c"><br>
-	비밀번호:<input name="pwd" type="password" value="1234"><br>
-	비밀번호 확인:<input name="pwdChk" type="password" value="1234"><br>
-	이름:<input name="name" value="모성종"><br>
+<form method="post" action="signup.do">
+	이메일:<input id="email" name="email" type="email" value="bbb@ccc.d"><br>
+	비밀번호:<input id="pwd" name="pwd" type="password" value="1234"><br>
+	비밀번호 확인:<input id="pwd2" name="pwdChk" type="password" onchange="p()">
+		<span id="pwdDiv"></span><br>
+	이름:<input id="name" name="name" value="모성종"><br>
 	<input type="submit" value="가입">
  </form>
  
- 
- ------------------------------------------------------+<html>
+ <%--
+ ------------------------------------------------------+
+ <html>
 <head>
 <style>
 span.a {color: red;}
@@ -250,3 +276,4 @@ function d(t){
 	</form>
 </body>
 </html>
+ --%>
