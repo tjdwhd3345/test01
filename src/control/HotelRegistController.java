@@ -14,14 +14,20 @@ public class HotelRegistController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //파일 경로
+        String path=request.getSession().getServletContext().getRealPath("");
+        
+        request.setCharacterEncoding("utf-8");
+        
         String name=request.getParameter("name");
         String location=request.getParameter("location");
         String info=request.getParameter("info");
         String service="";
         
-        /*System.out.println(name);
+        System.out.println(name);
         System.out.println(location);
-        System.out.println(info);*/
+        System.out.println(info);
         
         if(request.getParameterValues("sv") != null) {
             String[] sv=request.getParameterValues("sv");

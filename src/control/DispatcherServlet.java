@@ -49,7 +49,7 @@ public class DispatcherServlet extends HttpServlet {
              */
             
             String url=c.execute(request, response);
-            System.out.println(url);
+            System.out.println("url:"+url);
             RequestDispatcher rd=request.getRequestDispatcher(url);
             rd.forward(request, response);
             

@@ -7,6 +7,7 @@ public class Hotel {
     private float score;
     private String info;
     private String service;
+    private String img;
     
     public Hotel(int no, String name, String location, String info, String service) {
         this.no = no;
@@ -28,6 +29,13 @@ public class Hotel {
         this.score = score;
     }
     
+    
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     public String getService() {
         return service;
     }

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>호텔등록</h3>
-	<form action="hotelRegist.do" method="post">
+	<form action="hotelRegist.do" method="post" enctype="multipart/form-data">
 		이름:<input type="text" name="name"><br>
 		주소:<input type="text" name="location"><Br>
 		<!-- 평점:<input type="number" step="0.1" name="score"><Br> -->
@@ -21,6 +21,8 @@
 		<input type="checkbox" name="sv" value="pool">수영장
 		<input type="checkbox" name="sv" value="club">클럽
 		<br>
+		호텔사진 :
+		<input type="file" name="img"><br>
 		
 		<input type="submit" value="등록">
 	</form>
