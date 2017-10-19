@@ -27,18 +27,18 @@ public class LoginController implements Controller{
         try {
             User u=userDAO.selectUser(emailValue);
             if(pwdValue.equals(u.getPwd())){    //로그인 성공시
-                request.setAttribute("loginInfo", u);
-                request.setAttribute("msg", "{\"status\":1}");
+                session.setAttribute("loginInfo", u);
+                request.setAttribute("msg", "1");
             } else {    //로그인 실패시
-                request.setAttribute("msg", "{\"status\":1}");
+                request.setAttribute("msg", "-1");
             }
         } catch (FindException e) { //아이디 또는 비밀번호가 없을 시
             e.printStackTrace();
-            request.setAttribute("msg", "{\"status\":-1}");
+            request.setAttribute("msg", "-1");
         }
         
         
-        return "/result.jsp";
+        return "result.jsp";
     }
     
 }

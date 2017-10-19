@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.my.exception.DuplicatedException;
 import com.my.exception.FindException;
 import com.my.sql.MyConnection;
 import com.my.vo.User;
@@ -17,7 +18,9 @@ public class UserDAO {
         Connection con=null;
         PreparedStatement pstmt=null;
         
+        try {
         con=MyConnection.getConnection();
+        
         String insertSQL="insert into users values(?, ?, ?, ?)";
         pstmt=con.prepareStatement(insertSQL);
         pstmt.setString(1, user.getEmail());
@@ -25,8 +28,11 @@ public class UserDAO {
         pstmt.setString(3, user.getName());
         pstmt.setString(4, user.getTel());
         System.out.println("들어가라");
-          
+        
         pstmt.executeUpdate();
+        } finally {
+            MyConnection.close(pstmt, con);
+        }
     }
     public User selectUser(String email) throws FindException {
         Connection con=null;

@@ -2,20 +2,24 @@
 <title>joinForm.jsp</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-	//jQuery
+	<!--jQuery-->
 	$(function(){
+		var idCheckFlag=false;
+		var pwdCheckFlag=false;
+		
 		var $formObj = $("form");
 		$($formObj).submit(function(){
+			if(pwdCheckFlag == false){
+				alert("비밀번호를 확인해주세요.");
+				return false;
+			}
 			var u = $($formObj).attr("action");
 			var m = $($formObj).attr("method");
 			var d = $($formObj).serialize();
 			var s = function(responseData){
-				//$("#wrapper>section").empty();
-				//$("#wrapper>section").html(responseData);
 				var jsonObj=JSON.parse(responseData.trim());
 				alert(jsonObj.msg);
 				if(jsonObj.msg == "가입성공"){
-					console.log('aaaaaaaaaaaaa');
 					location.href="index.jsp";
 				}
 			}
@@ -27,34 +31,43 @@
 			});
 			return false;
 		});
+		
+		<%--이메일체크--%>
+		var $email=$("#email");
+		$("#email").change(function(){
+			alert($("#email").val());
+			//var u=
+		});
+		
+		<%--비밀번호 체크--%>
+		$("#pwd2").change(function(){
+			var msg="";
+			if($("#pwd").val() == $("#pwd2").val()){
+				msg="비밀번호가 일치합니다.";
+				$("#pwdDiv").css("color", "blue");
+				$("#pwdDiv").html(msg);
+				pwdCheckFlag=true;
+				
+			}else{
+				msg="비밀번호가 일치하지 않습니다.";
+				$("#pwdDiv").css("color", "red");
+				$("#pwdDiv").html(msg);
+				pwdCheckFlag=false;
+			}
+		});
 	});
 
-	function p() {
-		var pwd = document.getElementById("pwd").value;
-		var pwd2 = document.getElementById("pwd2").value;
-		var pwdDiv = document.getElementById("pwdDiv");
-
-		if (pwd == pwd2) {
-			pwdDiv.innerHTML = "비밀번호가 일치합니다";
-			pwdDiv.setAttribute("class", "b");
-			pwdCheckFlag = true;
-		} else {
-			pwdDiv.innerHTML = "비밀번호 불일치";
-			pwdDiv.setAttribute("class", "a");
-			pwdCheckFlag = false;
-		}
-	}
 </script>
 
 <form method="post" action="signup.do">
 	이메일:<input id="email" name="email" type="email" value="bbb@ccc.d"><br>
 	비밀번호:<input id="pwd" name="pwd" type="password" value="1234"><br>
-	비밀번호 확인:<input id="pwd2" name="pwdChk" type="password" onchange="p()">
+	비밀번호 확인:<input id="pwd2" name="pwdChk" type="password">
 		<span id="pwdDiv"></span><br>
 	이름:<input id="name" name="name" value="모성종"><br>
 	<input type="submit" value="가입">
- </form>
- 
+</form>
+
  <%--
  ------------------------------------------------------+
  <html>

@@ -37,13 +37,14 @@
 			var s = function(responseData){
 				var jsonObj = JSON.parse(responseData);
 				var msg="";
-		    	if(jsonObj.status == 1){
+		    	if(jsonObj.msg == 1) {
 					msg ="로그인 성공";
-				}else{
+		    		$(location).attr("href", "index.jsp");
+				} else {
 					msg ="로그인 실패";
 				}
 		    	window.alert(msg);	//경고창 띄우기
-		    	location.href("index.jsp");
+		    	//$(location).attr("href", "index.jsp");
 			}
 			
 			$.ajax({
@@ -53,7 +54,7 @@
 				success:s
 			});
 			
-			//return false;	//기본 이벤트 처리 막기
+			return false;	//기본 이벤트 처리 막기
 		});
 	});
 </script>
