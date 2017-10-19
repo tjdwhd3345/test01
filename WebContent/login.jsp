@@ -62,7 +62,7 @@
 	<form id="lgi" method="post" action="login.do">
 		이메일 : <input type="email" name="email" value="aaa@bbb.c"><br>
 		비밀번호 : <input type="password" name="pwd" value="1234"><br>
-	<input type="submit" value="로그인">  
+	<input type="submit" value="로그인">  &nbsp;&nbsp; 아직 회원이 아니신가요? <a href="joinForm.jsp">회원가입</a>
 </form> 
 </body>
 </html>

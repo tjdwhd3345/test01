@@ -49,10 +49,10 @@ public class UserDAO {
             System.out.println(rs.next());
             //if(rs.next()) {
             //rs.next();
-            System.out.println(rs.getString("email"));
+            /*System.out.println(rs.getString("email"));
             System.out.println(rs.getString("pwd"));
             System.out.println(rs.getString("name"));
-            System.out.println(rs.getString("tel"));
+            System.out.println(rs.getString("tel"));*/
             User user=new User(
                 rs.getString("email"),
                 rs.getString("pwd"),
