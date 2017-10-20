@@ -1,5 +1,7 @@
 package com.my.vo;
 
+import java.util.List;
+
 public class Hotel {
     private int no;
     private String name;
@@ -7,7 +9,8 @@ public class Hotel {
     private float score;
     private String info;
     private String service;
-    private String img;
+    private List<String> img;
+    
     
     public Hotel(int no, String name, String location, String info, String service) {
         this.no = no;
@@ -30,10 +33,10 @@ public class Hotel {
     }
     
     
-    public String getImg() {
+    public List<String> getImg() {
         return img;
     }
-    public void setImg(String img) {
+    public void setImg(List<String> img) {
         this.img = img;
     }
     public String getService() {

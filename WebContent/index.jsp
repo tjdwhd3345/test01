@@ -29,6 +29,7 @@
 							success : function(responseData){
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 									location.href="index.jsp";
+									//location.href="uploadDirectory/hotel02_3.jpg";
 								}else{
 									//location.href="index.jsp";
 									//$("#wrapper>section").empty();
