@@ -33,18 +33,25 @@ public class UploadTestController implements Controller {
 
         // MultipartRequest(request, 저장경로[, 최대허용크기, 인코딩케릭터셋, 동일한 파일명 보호 여부])
         MultipartRequest mr = new MultipartRequest(request, path, maxFilesize,
-                encType, new DefaultFileRenamePolicy());
-
-        Enumeration efiles = mr.getFileNames();
+                encType, new DefaultFileRenamePolicy());        
+        Enumeration efiles = mr.getFileNames();        
         File file=null;
+        String[] fpath = new String[2];
+        int i=0;
+        
         while(efiles.hasMoreElements()) {
             String fname=(String) efiles.nextElement();
             String fileName=mr.getFilesystemName(fname);    //업로드된 파일명
             if(fileName != null) {
                 file=mr.getFile(fname);
                 System.out.println("경로:"+file);
+                System.out.println("파일명:"+file.getName());
+                fpath[i]="uploadDirectory/"+file.getName();
+                //fpath[i]=file.getPath();
+                i++;
             }
         }
+        request.setAttribute("fpath", fpath);
         //File file1 = mr.getFile("img1");
         //File file2 = mr.getFile("img2");
         //System.out.println("file1:"+file1); // 첨부된 파일의 전체경로
