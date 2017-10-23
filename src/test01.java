@@ -14,9 +14,15 @@ import com.my.dao.UserDAO;
 import com.my.vo.Hotel;
 import com.my.vo.User;
 
+
+
 public class test01 {
 
     public static void main(String[] args) {
+        
+        
+        
+        
         /*UserDAO userDAO=new UserDAO();
         try {
             //userDAO.addUser(new User("bbc@ccc.d", "1234", "test2", "01022223333"));
@@ -48,10 +54,10 @@ public class test01 {
             for(Element elmt:elmts) {
                 System.out.println(elmt.getName());
                 if(elmt.getName().equals("header")) {
-                    /*List<Element> hcs=elmt.getChildren("columns");
+                    List<Element> hcs=elmt.getChildren("columns");
                     for(Element hc:hcs) {
                         System.out.println(hc.getName());
-                    }*/
+                    }
                     
                     Element hc=elmt.getChildren().get(0);
                     System.out.println(hc.getName());
@@ -73,5 +79,7 @@ public class test01 {
             System.out.println("IOException");
             e.printStackTrace();
         }
+        
+        
     }
 }
