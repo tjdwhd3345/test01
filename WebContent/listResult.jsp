@@ -50,13 +50,22 @@
 	<div id="target"></div>
 	<table border="1">
 		<tr>
-			<c:forEach var="value1" items="${values}">
-				<th>${value1.rowNum}</th>
-				<th>${value1.bplcNm}</th>
-				<th>${value1.siteWhlAddr}</th>
-				<th>${value1.rdnWhlAddr}</th>
+			<c:forEach var="values" items="${hList}">
+				<th>${values.rowNum}</th>
+				<th>${values.bplcNm}</th>
+				<th>${values.siteWhlAddr}</th>
+				<th>${values.rdnWhlAddr}</th>
 			</c:forEach>
 		</tr>
+		<c:forEach var="values" items="${hList2}">
+		<tr>
+			<td>${values.rowNum}</td>
+			<td>${values.bplcNm}</td>
+			<td>${values.siteWhlAddr}</td>
+			<td>${values.rdnWhlAddr}</td>
+		</tr>
+		</c:forEach>
+		
 	</table>
 </body>
 </html>

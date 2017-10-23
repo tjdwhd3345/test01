@@ -30,10 +30,13 @@ public class HotelListController implements Controller {
         request.setCharacterEncoding("utf-8");
         System.out.println(request.getParameter("d"));
         
-        //HttpSession session=request.getSession();
+        HttpSession session=request.getSession();
         //HashMap<String, String> map=new HashMap<String, String>();
         List<HotelList> hList=new ArrayList<HotelList>();
-        HotelList hl=new HotelList();
+        List<HotelList> hList2=new ArrayList<HotelList>();
+        
+        HotelList h1=new HotelList();
+        HotelList h2=new HotelList();
         //List<String> hList=new ArrayList<>();
         try {
             SAXBuilder builder=new SAXBuilder();
@@ -45,10 +48,10 @@ public class HotelListController implements Controller {
             
             Element root=doc.getRootElement();
             //doc.getDocumentElement().normalize();
-            System.out.println("root:"+root.getName());     //result
+            //System.out.println("root:"+root.getName());     //result
             List<Element> elmts=root.getChildren();
             for(Element elmt:elmts) {
-                System.out.println("root의 자식들"+elmt.getName()); // header, body
+                //System.out.println("root의 자식들"+elmt.getName()); // header, body
                 if(elmt.getName().equals("header")) {
                     //List<Element> hcs=elmt.getChildren("columns");  
                     /*for(Element hc:hcs) {
@@ -56,25 +59,59 @@ public class HotelListController implements Controller {
                     }*/
                     
                     Element hc=elmt.getChildren().get(0);   //header의 자식 중 첫 번째 녀석을 얻어와
-                    System.out.println("이건 뭐지?"+hc.getName());  //columns
+                    //System.out.println("이건 뭐지?"+hc.getName());  //columns
                     List<Element> cols=hc.getChildren();    //columns의 자식들을 얻어오자
                     for(Element col:cols) {
-                        System.out.println(col.getName()+":"+col.getText());
+                        //System.out.println(col.getName()+":"+col.getText());
                         //map.put(col.getName(), col.getText());
                         //hList.add(new HotelList());
-                        if(col.getName().equals("rowNum"))
-                            hl.setRowNum(col.getText());
-                        if(col.getName().equals("bplcNm"))
-                            hl.setRowNum(col.getText());
-                        if(col.getName().equals("siteWhlAddr"))
-                            hl.setRowNum(col.getText());
-                        if(col.getName().equals("rdnWhlAddr"))
-                            hl.setRowNum(col.getText());
+                        if(col.getName().equals("rowNum")) {
+                            h1.setRowNum(col.getText());
+                        }
+                        if(col.getName().equals("bplcNm")) {
+                            h1.setBplcNm(col.getText());
+                        }
+                        if(col.getName().equals("siteWhlAddr")) {
+                            h1.setSiteWhlAddr(col.getText());
+                        }
+                        if(col.getName().equals("rdnWhlAddr")) {
+                            h1.setRdnWhlAddr(col.getText());
+                        }
                     }
-                        hList.add(hl);
-                        request.setAttribute("values", hList);
-                        System.out.println("???????????????");
-                        //session.setAttribute("values", map);
+                    //System.out.println("hl:"+hl.getRowNum());
+                    //System.out.println("hl:"+hl.getBplcNm());
+                    //System.out.println("hl:"+hl.getSiteWhlAddr());
+                    //System.out.println("hl:"+hl.getRdnWhlAddr());
+                        hList.add(h1);
+                        //request.setAttribute("hList", hList);
+                        //System.out.println("???????????????");
+                        session.setAttribute("hList", hList);
+                } else if(elmt.getName().equals("body")){
+                    System.out.println(elmt.getName());     //elmt=body
+                    Element bc=elmt.getChildren().get(0);
+                    System.out.println(bc.getName());       //bc=rows
+                    List<Element> bcrows=bc.getChildren();     
+                    for(Element bcrow:bcrows) {
+                        //System.out.println(bcrow.getName());    //bcrow=row
+                        List<Element> bcrowcols=bcrow.getChildren();
+                        for(Element bcrowcol:bcrowcols) {
+                            if(bcrowcol.getName().equals("rowNum")) {
+                                h2.setRowNum(bcrowcol.getText());
+                            }
+                            if(bcrowcol.getName().equals("bplcNm")) {
+                                h2.setBplcNm(bcrowcol.getText());
+                            }
+                            if(bcrowcol.getName().equals("siteWhlAddr")) {
+                                h2.setSiteWhlAddr(bcrowcol.getText());
+                            }
+                            if(bcrowcol.getName().equals("rdnWhlAddr")) {
+                                h2.setRdnWhlAddr(bcrowcol.getText());
+                            }
+                            //System.out.println(bcrowcol.getName());
+                            hList2.add(h2);
+                        }
+                        session.setAttribute("hList2", hList2);
+                    }
                 }
             }
             
