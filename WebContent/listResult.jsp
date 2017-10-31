@@ -150,7 +150,7 @@
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-item"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getEmail() %>님</li>
             <li class="nav-item" id="">
               <a class="nav-link" href="#">예약확인</a>
             </li>
@@ -195,7 +195,7 @@
     
 	<div id="target" class="container">
 		<table border="1" style="margin-top:100px; margin-bottom:50px;">
-			<tr>
+			<tr class="bg-dark" style="color:#FFFFFF">
 				<c:forEach var="values" items="${hList}">
 					<th>${values.rowNum}</th>
 					<th>${values.bplcNm}</th>
@@ -204,6 +204,7 @@
 				</c:forEach>
 			</tr>
 			<c:set var="seV" value="${param['searchValue']}"/>
+			<form action="detail.do" method="post" id="fd">
 			<c:forEach var="values" items="${hList2}">
 			<tr>
 				<!-- 검색 키워드가 장소인지 이름인지 -->
@@ -218,13 +219,40 @@
 				<!-- 검색 키워드를 포함한 업체만 출력 -->
 				<c:if test="${fn:contains(site, seV)}">
 					<td>${values.rowNum}</td>
-					<td>${values.bplcNm}</td>
+					<td><a href="#" id="dd" 
+					onclick="window.open('detail.do?num=${values.rowNum}&name=${values.bplcNm}&x=${values.x}&y=${values.y}&addr=${values.siteWhlAddr}')">
+						${values.bplcNm}</a></td>
 					<td>${values.siteWhlAddr}</td>
 					<td>${values.rdnWhlAddr}</td>
 				</c:if>
 			</tr>
 			</c:forEach>
+			</form>
 		</table>
+		<script>
+		/* function wo(){
+			
+			window.open('detail.do');
+		} */
+		/*		 
+		$(function(){
+			var $form=$('#fd');
+			$('#dd').click(function(){
+				var d=$($form).serialize();
+				var u='detail.do';
+				$.ajax({
+					url:u,
+					data:d,
+					method:'post',
+					success:function(){
+						window.open(u);
+					}
+				});
+				return false;
+			});
+		});
+		*/
+		</script>
 		
 	</div>
 	<!-- Footer -->

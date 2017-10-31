@@ -11,7 +11,6 @@ public class Hotel {
     private String service;
     private List<String> img;
     
-    
     public Hotel(int no, String name, String location, String info, String service) {
         this.no = no;
         this.name = name;
@@ -31,7 +30,6 @@ public class Hotel {
         this(no, name, location, info);
         this.score = score;
     }
-    
     
     public List<String> getImg() {
         return img;

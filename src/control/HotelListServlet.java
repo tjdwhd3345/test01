@@ -107,6 +107,12 @@ public class HotelListServlet extends HttpServlet {
                             if(bcrowcol.getName().equals("rdnWhlAddr")) {
                                 h2.setRdnWhlAddr(bcrowcol.getText());
                             }
+                            if(bcrowcol.getName().equals("x")) {
+                                h2.setX(bcrowcol.getText());
+                            }
+                            if(bcrowcol.getName().equals("y")) {
+                                h2.setY(bcrowcol.getText());
+                            }
                             //System.out.println(bcrowcol.getName());                            
                         }
                         hList2.add(h2);

@@ -5,6 +5,8 @@ public class HotelList {
     private String bplcNm;
     private String siteWhlAddr;
     private String rdnWhlAddr;
+    private String x;
+    private String y;
     
     
     public HotelList() {
@@ -16,7 +18,27 @@ public class HotelList {
         this.siteWhlAddr = siteWhlAddr;
         this.rdnWhlAddr = rdnWhlAddr;
     }
+    public HotelList(String rowNum, String bplcNm, String siteWhlAddr, String rdnWhlAddr, String x, String y) {
+        this.rowNum = rowNum;
+        this.bplcNm = bplcNm;
+        this.siteWhlAddr = siteWhlAddr;
+        this.rdnWhlAddr = rdnWhlAddr;
+        this.x = x;
+        this.y = y;
+    }
     
+    public String getX() {
+        return x;
+    }
+    public void setX(String x) {
+        this.x = x;
+    }
+    public String getY() {
+        return y;
+    }
+    public void setY(String y) {
+        this.y = y;
+    }
     public String getRowNum() {
         return rowNum;
     }
