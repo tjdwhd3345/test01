@@ -26,7 +26,7 @@
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title></title>
+	<title>::HOTELBOOK</title>
 	<style>
 		nav>ul>li{display:inline-block}
 	</style>
@@ -106,18 +106,10 @@
 			}//end for
 			
 			//hotel list를 불러와라
-			$(".hosearch").submit(function(){
+			$("#test").submit(function(){
 				//var $d=$("#searchValue").val()+$("#search").val();
 				var $d=$('.hosearch').serialize();
-				$.ajax({
-					url:$('.hosearch').attr('action'),
-					method:'POST',
-					data:'d='+$d,
-					success:function(){
-						//location.href="listResult.jsp";
-						console.log("test")
-					}
-				});
+				$('hosearch').submit();
 			});//end click
 		});
 	</script>
@@ -194,8 +186,9 @@
     --%>
     
 	<div id="target" class="container">
+	
 		<table border="1" style="margin-top:100px; margin-bottom:50px;">
-			<tr class="bg-dark" style="color:#FFFFFF">
+			<tr class="bg-dark" style="color:#FFFFFF" align="center">
 				<c:forEach var="values" items="${hList}">
 					<th>${values.rowNum}</th>
 					<th>${values.bplcNm}</th>

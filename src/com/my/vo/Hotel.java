@@ -11,6 +11,16 @@ public class Hotel {
     private String service;
     private List<String> img;
     
+    
+    public Hotel() {
+        
+    }
+    public Hotel(int no, String name, String location, float score) {
+        this.no = no;
+        this.name = name;
+        this.location = location;
+        this.score = score;
+    }
     public Hotel(int no, String name, String location, String info, String service) {
         this.no = no;
         this.name = name;

@@ -19,6 +19,8 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import com.my.dao.HotelDAO;
+import com.my.vo.Hotel;
 import com.my.vo.HotelList;
 
 /**
@@ -42,7 +44,6 @@ public class HotelListServlet extends HttpServlet {
         List<HotelList> hList2=new ArrayList<HotelList>();
         
         
-        
         try {
             SAXBuilder builder=new SAXBuilder();
             System.out.println("SAX success");
@@ -56,8 +57,8 @@ public class HotelListServlet extends HttpServlet {
             //System.out.println("root:"+root.getName());     //result
             List<Element> elmts=root.getChildren();
             for(Element elmt:elmts) {
-                //System.out.println("root의 자식들"+elmt.getName()); // header, body
                 if(elmt.getName().equals("header")) {
+                    //Element hc=elmts.get(0).getChildren().get(0);   //header의 자식 중 첫 번째 녀석을 얻어와
                     Element hc=elmt.getChildren().get(0);   //header의 자식 중 첫 번째 녀석을 얻어와
                     //System.out.println("이건 뭐지?"+hc.getName());  //columns
                     List<Element> cols=hc.getChildren();    //columns의 자식들을 얻어오자
@@ -83,9 +84,8 @@ public class HotelListServlet extends HttpServlet {
                     //System.out.println("h1:"+h1.getRdnWhlAddr());
                     hList.add(h1);
                     request.setAttribute("hList", hList);
-                    
-                } else if(elmt.getName().equals("body")){
-                    //System.out.println(elmt.getName());     //elmt=body
+                }else if(elmt.getName().equals("body")) {
+                    //Element bc=elmts.get(1).getChildren().get(0);
                     Element bc=elmt.getChildren().get(0);
                     //System.out.println(bc.getName());       //bc=rows
                     List<Element> bcrows=bc.getChildren();     
@@ -93,6 +93,7 @@ public class HotelListServlet extends HttpServlet {
                         //System.out.println(bcrow.getName());    //bcrow=row
                         List<Element> bcrowcols=bcrow.getChildren();
                         HotelList h2=new HotelList();
+                        HotelDAO hDAO=new HotelDAO();
                         for(Element bcrowcol:bcrowcols) {
                             if(bcrowcol.getName().equals("rowNum")) {
                                 h2.setRowNum(bcrowcol.getText());
@@ -115,12 +116,15 @@ public class HotelListServlet extends HttpServlet {
                             }
                             //System.out.println(bcrowcol.getName());                            
                         }
+                        
+                        //hDAO.addHotel(new Hotel(Integer.parseInt(h2.getRowNum()), h2.getBplcNm(), h2.getSiteWhlAddr(), 0));
+                        //System.out.println(h2.getRowNum());
                         hList2.add(h2);
+                        //System.out.println(hList2.size());
                         request.setAttribute("hList2", hList2);
                     }
                 }
             }
-            
             
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException");
@@ -130,6 +134,12 @@ public class HotelListServlet extends HttpServlet {
             e.printStackTrace();
         } catch (IOException e) {
             System.out.println("IOException");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }       
         

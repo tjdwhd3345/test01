@@ -1,11 +1,12 @@
 <%@page import="com.my.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>${param['name'] }::HOTELBOOK</title>
 	
 	<!-- bootstrap start -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -134,12 +135,56 @@
 	<div id="target" class="container">
 	    <table class="table">
 			<tr>
-				<td><h1>${param['name'] }</h1></td>
+				<td colspan="2"><h1>${param['name']}</h1></td>
 			</tr>
-			<tr><td>${param['addr']}</td></tr>		
-	    
+			<tr>
+				<td colspan="2">${param['addr']}</td>
+			</tr>		
+	    <tr>
+	    	<td>
+	    		<div>
+	    		<img src="hotel04_.jpg" width="480px" height="300px">
+	    		</div>
+	    	</td>
+	    	<td>
+	    		<div>
+	    		<h1>${requestScope.ho.score } / 5.0</h1>
+	    		여기는 이용평가항목의 수치나 지도가 있었으면 좋겠어
+	    		</div>
+	    	</td>
+	    </tr>
 	    </table>
 	</div>
+	<div id="target" class="container">
+	<p>여기에는 방의 목록이 div로 쭉 나왔으면 좋겠어
+	동작은 각 방을 클릭하면 자바수업 때 했던 것처럼 반응형으로 방의 상세가 보여지고.
+	 그러면 방목록은 굳이 div아니어도 되겠다</p>
+	 <c:forEach var="room" items="${requestScope.ro}">
+	 	<div class="room_div" id="${room.no}">${room.name }
+	 		<div class="room_detail"></div>
+	 	</div>
+	 </c:forEach>
+	 <script>
+	 $(function(){
+		var $rDiv=$('.room_div'); 
+		$($rDiv).click(function(){
+			//alert($(this).attr('id'));
+			var $otherRoom=$($rDiv).not(this);
+			$otherRoom.find("div.room_detail").empty();
+			var $detailObj = $(this).find("div.room_detail");
+			
+			
+			
+			$detailObj.html('aaaa');
+		});
+	 });
+	 </script>
+	</div>
+	<div id="target" class="container">
+	<p>호텔정보(제공 서비스)가 div로 쭉 나왔음ㄴ 좋겠어 아니면 테이블이나</p>
+	<p></p>
+	</div>
+	
 	<div id="target" class="container">
 	    <table class="table table-striped table-hover ">
 		  <thead>
@@ -161,6 +206,17 @@
 		</table> 
 		
 	</div>
-
+	<div id="target" class="container">
+	<p>이용후기가 들어갈 div위치</p>
+	</div>
+	
+	<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    
 </body>
 </html>

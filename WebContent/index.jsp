@@ -61,18 +61,11 @@
 			}//end for
 			
 			//hotel list를 불러와라
-			$(".hosearch").submit(function(){
+			//$(".hosearch").click(function(){
+			$("#test").click(function(){
 				//var $d=$("#searchValue").val()+$("#search").val();
 				var $d=$('.hosearch').serialize();
-				$.ajax({
-					url:$('.hosearch').attr('action'),
-					method:'POST',
-					data:'d='+$d,
-					success:function(){
-						//location.href="listResult.jsp";
-						console.log("test")
-					}
-				});
+				$('.hosearch').submit();
 			});//end click
 		});
 	</script>
@@ -139,7 +132,7 @@
 						<%-- 달력페이지 include --%>
 						<jsp:include page="calTest.jsp"/>
 					</div>
-					<input type="submit" value="검색" id="test">
+					<input type="button" value="검색" id="test">
 				</form>
             </div>
           </div>
