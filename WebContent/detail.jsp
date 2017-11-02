@@ -27,6 +27,14 @@
 	<title></title>
 	<style>
 		nav>ul>li{display:inline-block}
+		
+	/* 메인 슬라이드 */
+	#rolling{width:660px;  margin:0px auto; position:relative; overflow:hidden;} 
+	#rolling h1{display:none;}
+	#rolling div:first-of-type{width:3000px; position:relative;}
+	#rolling img{width:658px; height:500px;}
+	#circle{width:650px; text-align:center; margin:auto;}
+	#circle i{display:inline-block; padding:5px; margin:auto 0px; border-radius:10px; cursor:pointer; font-weight: bold;}
 	</style>
 	<!-- bootstrap end -->
 	
@@ -68,19 +76,42 @@
 			}//end for
 			
 			//hotel list를 불러와라
-			$(".hosearch").submit(function(){
+			$("#test").click(function(){
 				//var $d=$("#searchValue").val()+$("#search").val();
 				var $d=$('.hosearch').serialize();
-				$.ajax({
-					url:$('.hosearch').attr('action'),
-					method:'POST',
-					data:'d='+$d,
-					success:function(){
-						//location.href="listResult.jsp";
-						console.log("test")
-					}
-				});
+				$('.hosearch').submit();
 			});//end click
+			
+			//이미지 슬라이드
+			var count=0;
+			$("#circle>i").eq(0).css("background", "#E8F5FF");
+
+			/*자동롤링 start*/
+			setInterval(function(){
+				count++;
+				if($("#rolling>div:eq(0)").position().left == -1800){
+					$("#rolling>div:eq(0)").append('<img src="hotel01_.jpg" alt="롤링이미지">').animate({left:"-=660px"},
+							function(){
+								$("#rolling>div:eq(0)").css({"left" : 0});
+								$("#rolling>div:eq(0)>img").last().remove();
+							});
+					count=0;
+					$("#circle>i").eq(count).css("background", "#E8F5FF").siblings().css("background", "none");
+				}
+			},2000);
+
+			/* 자동롤링 end */
+			var change=0;
+			$("#circle>i").click(function(){
+				//alert($(this).index());
+				var me = $(this).index();
+				change = (me * (-660)) + "px";
+				$("#rolling>div:eq(0)").animate({left:change});
+				$("#circle>i").eq(me).css("background", "#E8F5FF").siblings().css("background", "none");
+			});
+			//이미지 슬라이드 끝
+			
+			
 		});
 	</script>
 </head>
@@ -142,26 +173,59 @@
 			</tr>		
 	    <tr>
 	    	<td>
-	    		<div>
-	    		<img src="hotel04_.jpg" width="480px" height="300px">
+	    		<div class="top_wrap">
+	    		<section id="rolling">
+	    			<div>
+			    		<img src="hotel01_.jpg" width="480px" height="300px">
+			    		<img src="hotel03_copy.jpg" width="480px" height="300px">
+			    		<img src="hotel04_.jpg" width="480px" height="300px">
+		    		</div>
+		    		<div id="circle">
+			    		<i><img src="hotel01_.jpg" style="width:100px; height:100px;"></i>
+			    		<i><img src="hotel03_copy.jpg" style="width:100px; height:100px;"></i>
+			    		<i><img src="hotel04_.jpg" style="width:100px; height:100px;"></i>
+		    		</div>
+		    	</section>
 	    		</div>
 	    	</td>
+	    	<script>
+	    	/*
+	    	$(function(){
+	    		//mouseover 이벤트
+				$imgs=$('#mainimg').find('div>img');
+				//$('#mainimg>div>img').hover(function(){
+				$($imgs).hover(function(){
+	    			alert('aaa');
+	    			$('#mainimg').attr('src', $(this).attr('src'));
+	    		});
+	    		//$($imgs).attr('src');
+	    		
+	    	});*/
+	    	</script>
 	    	<td>
 	    		<div>
 	    		<h1>${requestScope.ho.score } / 5.0</h1>
-	    		여기는 이용평가항목의 수치나 지도가 있었으면 좋겠어
+	    		여기는 이용평가항목의 요약이나 지도가 있었으면 좋겠어
 	    		</div>
 	    	</td>
 	    </tr>
 	    </table>
 	</div>
 	<div id="target" class="container">
-	<p>여기에는 방의 목록이 div로 쭉 나왔으면 좋겠어
-	동작은 각 방을 클릭하면 자바수업 때 했던 것처럼 반응형으로 방의 상세가 보여지고.
-	 그러면 방목록은 굳이 div아니어도 되겠다</p>
+	<p>객실정보</p>
 	 <c:forEach var="room" items="${requestScope.ro}">
-	 	<div class="room_div" id="${room.no}">${room.name }
-	 		<div class="room_detail"></div>
+	 	<div class="room_div" id="${room.no}" style="border:1px solid;">${room.name }
+	 		<div class="room_detail" style="display:none;">
+	 			<table class="table table-striped table-hover ">
+	 				<tr align="center">
+	 					<th colspan="2">객실 정보</th><th>최대 인원</th><th colspan="2">가격</th>
+	 				</tr>
+	 				<tr align="center">
+	 					<td>여긴사진</td><td>${room.name}</td><td>${room.beds}</td><td align="right">${room.price }</td>
+	 					<td><input type="button" value="예약"></td>
+	 				</tr>
+	 			</table>	
+	 		</div>
 	 	</div>
 	 </c:forEach>
 	 <script>
@@ -170,19 +234,79 @@
 		$($rDiv).click(function(){
 			//alert($(this).attr('id'));
 			var $otherRoom=$($rDiv).not(this);
-			$otherRoom.find("div.room_detail").empty();
+			$otherRoom.find("div.room_detail").hide();
+			$(this).find("div.room_detail").show();
+			/*
 			var $detailObj = $(this).find("div.room_detail");
-			
-			
-			
-			$detailObj.html('aaaa');
+			var $rid=$(this).attr('id');
+			var detail='<table class="table table-striped table-hover ">';
+			detail+='<tr align="center">';
+			detail+='<th colspan="2">객실 정보</th><th>최대 인원</th><th>가격</th>';
+			detail+='</tr>';
+			detail+='<tr>';
+			detail+='<td>여긴사진</td><td>자세한 내용은</td><td>ajax를 해야하는건가</td><td>이미 request로 받아왔는데..? 어떻게 쓰지?</td>';
+			detail+='</tr>';
+			detail+='</table>';
+			$detailObj.html(detail);
+			*/
+			/*
+			var u='roomInfo.do';
+			var d='roomno='+$rid;
+			$.ajax({
+				url:u,
+				data:d,
+				method:'post',
+				success:function(){
+					$detailObj.html('aaaa');
+					
+				}
+			});
+			*/
 		});
 	 });
 	 </script>
 	</div>
 	<div id="target" class="container">
-	<p>호텔정보(제공 서비스)가 div로 쭉 나왔음ㄴ 좋겠어 아니면 테이블이나</p>
-	<p></p>
+		<p>호텔정보(제공 서비스)가 div로 쭉 나왔음ㄴ 좋겠어 아니면 테이블이나</p>
+		<caption>이용가능 서비스</caption>
+		<style>
+		#mytable{
+			width:100%;
+			max-width:100%;
+			
+		}
+		</style>
+		<table id="mytable" class="table table-striped table-hover ">
+			<c:forEach var="ts" items="${requestScope.ts}">
+			<tr>
+				<td width="20%">${ts.name }</td>
+				<c:forEach var="hs" items="${requestScope.hs}">
+				<c:choose>
+					<c:when test="${ts.name eq hs.name}">
+						<td width="40%">
+					 		${hs.service}
+					 	</td>
+					</c:when>
+				</c:choose>
+				</c:forEach>
+			</tr>
+			</c:forEach>
+		</table>
+		
+		<c:forEach var="ts" items="${requestScope.ts}">
+		<div id="${ts.name }" style="display:block;">
+			${ts.name } |
+			<c:forEach var="hs" items="${requestScope.hs}">
+				<c:choose>
+					<c:when test="${ts.name eq hs.name}">
+						<div style="display:inline;">
+					 		${hs.service} |
+					 	</div>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</div>
+		</c:forEach> 		
 	</div>
 	
 	<div id="target" class="container">

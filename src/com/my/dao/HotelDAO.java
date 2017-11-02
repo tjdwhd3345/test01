@@ -17,9 +17,9 @@ public class HotelDAO {
         ResultSet rs=null;
         
         String insertSQL="insert into hotel (name, location, score) values(?, ?, ?)";
-        //String selectSQL="select last_insert_id()";
-        //String insertInfoSQL="insert into hotel_info values(?, ?)";
-        //String insertServiceSQL="insert into hotel_service values(?,?)";
+        String selectSQL="select last_insert_id()";
+        String insertInfoSQL="insert into hotel_info values(?, ?)";
+        String insertServiceSQL="insert into hotel_service values(?,?)";
         try {
             con=MyConnection.getConnection();
             //con.setAutoCommit(false);   //오토커밋 해제
@@ -29,6 +29,7 @@ public class HotelDAO {
             pstmt.setString(2, hotel.getLocation());
             pstmt.setFloat(3, hotel.getScore());
             pstmt.executeUpdate();
+            
             /*
             pstmt=con.prepareStatement(selectSQL);
             rs=pstmt.executeQuery();
