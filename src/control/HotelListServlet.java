@@ -36,6 +36,10 @@ public class HotelListServlet extends HttpServlet {
         
         String searchValue=request.getParameter("searchValue");
         String search=request.getParameter("search");
+        String checkIn=request.getParameter("checkIn");
+        String checkOut=request.getParameter("checkOut");
+        System.out.println(checkIn);
+        System.out.println(checkOut);
         //request.setAttribute("searchValue", searchValue);
         
         HttpSession session=request.getSession();
@@ -43,6 +47,8 @@ public class HotelListServlet extends HttpServlet {
         List<HotelList> hList=new ArrayList<HotelList>();
         List<HotelList> hList2=new ArrayList<HotelList>();
         
+        session.setAttribute("checkIn", checkIn);
+        session.setAttribute("checkOut", checkOut);
         
         try {
             SAXBuilder builder=new SAXBuilder();

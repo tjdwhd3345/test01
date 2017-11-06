@@ -32,6 +32,16 @@
 	</style>
 	<!-- bootstrap end -->
 	
+	<!-- 달력 css -->
+	<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+	<script src="http://kylemitofsky.com/libraries/libraries/bootstrap-datepicker.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://kylemitofsky.com/libraries/libraries/datepicker.css">
+	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css">
+	<!-- 달력 css 끝 -->
+	
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Hotel List</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -73,6 +83,10 @@
 	 <!-- 상단 index -->
 	 <script>
 		$(function(){ //jQuery
+			
+			//alert('${checkIn}');
+			//alert('${checkOut}');
+			
 			var $liArr = $("nav>div>div>ul>li");
 			for(var i=0; i<$liArr.length; i++){
 				var f = function(index){
@@ -89,7 +103,7 @@
 							method : 'GET',
 							success : function(responseData){
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
-									location.href="index.jsp";
+									//location.href="index.jsp";
 									//location.href="uploadDirectory/hotel02_3.jpg";
 								}else{
 									//location.href="index.jsp";
@@ -111,6 +125,46 @@
 				var $d=$('.hosearch').serialize();
 				$('hosearch').submit();
 			});//end click
+			
+			
+			//달력
+			var nowTemp = new Date();
+			 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+			 var checkin = $('#checkIn').datepicker({
+
+			   beforeShowDay: function(date) {
+			     return date.valueOf() >= now.valueOf();
+			   },
+			   autoclose: true
+
+			 }).on('changeDate', function(ev) {
+			   if (ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
+
+			     var newDate = new Date(ev.date);
+			     newDate.setDate(newDate.getDate() + 1);
+			     checkout.datepicker("update", newDate);
+
+			   }
+			   $('#checkOut')[0].focus();
+			 });
+
+
+			 var checkout = $('#checkOut').datepicker({
+			   beforeShowDay: function(date) {
+			     if (!checkin.datepicker("getDate").valueOf()) {
+			       return date.valueOf() >= new Date().valueOf();
+			     } else {
+			       return date.valueOf() > checkin.datepicker("getDate").valueOf();
+			     }
+			   },
+			   autoclose: true
+
+			 }).on('changeDate', function(ev) {});
+			 //달력 끝
+			 
+			 
+			 
 		});
 	</script>
 	
@@ -158,8 +212,7 @@
       </div>
     </nav>
     
-    <%--
-    //검색기능하고나서 나중에 상단에 서치바도 배치해야됨.
+    <!-- 검색기능하고나서 나중에 상단에 서치바도 배치해야됨. -->
     <div> 
     <!-- Page Content -->
         <div class="container">
@@ -169,21 +222,19 @@
 				<option value="name">이름</option>
 			</select>
 			<input type="text" id="searchValue" name="searchValue">
-			<div id="cal1" display="none" style="float:left;">
-				달력페이지 include
-				<jsp:include page="calTest.jsp"/>
-			</div>
+			<div class="form-group" style="float:left">
+  <input id="checkIn" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="&#xf133;  Check-In">
+</div>
+
 			&nbsp;&nbsp;
-			<div id="cal2" style="float:left;">
-				달력페이지 include
-				<jsp:include page="calTest.jsp"/>
-			</div>
+<div class="form-group" style="float:left">
+  <input id="checkOut" type="text" class="form-control clickable input-md" id="DtChkOut" placeholder="&#xf133;  Check-Out">
+</div>
 			<input type="submit" value="검색" id="test">
 		</form>
 		<!-- <input type="button" id="test" value="test">--><!-- hotel list를 불러와라 -->
         </div>
     </div> 
-    --%>
     
 	<div id="target" class="container">
 	

@@ -21,8 +21,8 @@ public class LogoutServlet extends HttpServlet {
         session.removeAttribute("loginInfo");
         //request.setAttribute("msg", "1"); //?이거 왜 해줌?
         
-        RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+        //RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+        //rd.forward(request, response);
 	}
 
 }
