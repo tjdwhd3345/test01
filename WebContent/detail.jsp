@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>${param['name'] }::HOTELBOOK</title>
+	<title>${param['name'] }::CHECKIN.COM</title>
 	
 	<!-- bootstrap start -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -64,6 +64,7 @@
 							success : function(responseData){
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 									//location.href="index.jsp";
+									location.reload();
 									//location.href="uploadDirectory/hotel02_3.jpg";
 								}else{
 									//location.href="index.jsp";
@@ -122,8 +123,6 @@
 	
 	<!-- 다음지도 api -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c2aa194de2a7b800dc342de69bf136a&libraries=services"></script>
-	<c:set var="x" value="${param['x'] }"/>
-	<c:set var="y" value="${param['y'] }"/>
 	<fmt:parseNumber var="px" type="number" value="${param['x'] }"/>
 	<fmt:parseNumber var="py" type="number" value="${param['y'] }"/>
 	<script>
@@ -167,7 +166,7 @@
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp"> MOMO </a>
+        <a class="navbar-brand" href="index.jsp"> CHECKIN.COM </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -177,13 +176,17 @@
           Object obj=session.getAttribute("loginInfo");
 		  if(obj == null){
 			%>
+			<!-- 
             <li class="nav-item active" id="login.jsp">
               <a class="nav-link" href="#">Login
-                <!-- <span class="sr-only">(current)</span> -->
+                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item" id="joinForm.jsp">
               <a class="nav-link" href="#">Sign up</a>
+            </li>-->
+            <li class="nav-item" id="EJLogin.jsp">
+            	<a class="nav-link" href="#">Login/Sign up</a>
             </li>
             <%}
 			else{
@@ -264,27 +267,34 @@
 	<div id="target" class="container">
 	<p><strong>객실정보</strong></p>
 	 <c:forEach var="room" items="${requestScope.ro}">
-	 	<div class="room_div" id="${room.no}" style="border:1px solid;">${room.name }
+	 	<div class="room_div" id="${room.no}" style="border:1px solid;">
+	 		${room.name }
 	 		<div class="room_detail" style="display:none;">
 	 			<form id="roomForm" action="reserveForm.jsp" method="post">
-	 			<table class="table table-striped table-hover ">
-	 				<tr align="center">
-	 					<th colspan="2">객실 정보</th><th>최대 인원</th><th colspan="2">가격</th>
-	 				</tr>
-	 				<tr align="center">
-	 					<td><img name="roomimg" src="">여긴사진</td>
-	 					<td><input readonly type="text" name="roomname" value="${room.name}"></td>
-	 					<td><input readonly type="text" name="roombeds" value="${room.beds}"></td>
-	 					<td align="right"><input readonly type="text" name="roomprice" value="${room.price}"></td>
-	 					<td><input type="button" value="예약"></td>
-	 				</tr>
-	 			</table>	
+		 			<input type="hidden" name="hotelnum" value="${param['num'] }">
+		 			<input type="hidden" name="hotelname" value="${param['name'] }">
+		 			<input type="hidden" name="hoteladdr" value="${param['addr'] }">
+		 			<input type="hidden" name="roomnum" value="${room.no }">
+		 			<table class="table table-striped table-hover ">
+		 				<tr align="center">
+		 					<th colspan="2">객실 정보</th><th>최대 인원</th><th colspan="2">가격</th>
+		 				</tr>
+		 				<tr align="center">
+		 					<td><img name="roomimg" src="">여긴사진</td>
+		 					<td><input readonly type="text" name="roomname" value="${room.name}"></td>
+		 					<td><input readonly type="text" name="roombeds" value="${room.beds}"></td>
+		 					<td align="right"><input readonly type="text" name="roomprice" value="${room.price}"></td>
+		 					<td><input type="button" value="예약"></td>
+		 				</tr>
+		 			</table>	
+	 			
 	 			</form>
 	 		</div>
 	 	</div>
 	 </c:forEach>
 	<style>
 		input[type=text]{border:none}
+		.room_div{cursor:pointer}
 	</style>
 	<script>
 	
@@ -294,10 +304,14 @@
 		$($btn).click(function(){
 			<c:choose>
 				<c:when test="${empty sessionScope.loginInfo }">
-					location.href="login.jsp";
+					location.href="EJLogin.jsp";
 				</c:when>
 				<c:otherwise>
-					$('#roomForm').submit();
+					//alert('aaa');
+					$(this).parents("#roomForm").submit();
+					//alert($fobj);
+					//$($fobj).submit();
+					//$('#roomForm').submit();
 				</c:otherwise>
 			</c:choose>
 		});

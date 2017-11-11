@@ -161,6 +161,12 @@
 	
 	<!-- Page Content -->
     <section class="py-5">
+    <style>
+	.top {
+	   height: 50px;
+	}
+	</style>
+	<div class="top"></div>
         <div class="container">
         
 	<form class="form" id="lgi" method="post" action="login.do">
@@ -185,7 +191,12 @@
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 </script>
-
+<style>
+.push {
+   height: 650px;
+}
+</style>
+<div class="push"></div>
     </section>
 	
 	<!-- Footer -->

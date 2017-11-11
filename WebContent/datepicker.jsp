@@ -45,8 +45,7 @@ $(function(){ //jQuery
 					method : 'GET',
 					success : function(responseData){
 						if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
-							//location.href="index.jsp";
-							location.reload();
+							location.href="index.jsp";
 							//location.href="uploadDirectory/hotel02_3.jpg";
 						}else{
 							//location.href="index.jsp";
@@ -67,10 +66,8 @@ $(function(){ //jQuery
 	//$(".hosearch").click(function(){
 	$("#test").click(function(){
 		//var $d=$("#searchValue").val()+$("#search").val();
-		
 		var $d=$('.hosearch').serialize();
 		$('.hosearch').submit();
-		
 	});//end click
 });
 </script>
@@ -78,27 +75,43 @@ $(function(){ //jQuery
  $(function(){
 	 var nowTemp = new Date();
 	 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-	  
+
 	 var checkin = $('#checkIn').datepicker({
-	   onRender: function(date) {
-	     return date.valueOf() < now.valueOf() ? 'disabled' : '';
-	   }
+
+	   beforeShowDay: function(date) {
+	     return date.valueOf() >= now.valueOf();
+	   },
+	   autoclose: true
+
 	 }).on('changeDate', function(ev) {
-	   if (ev.date.valueOf() > checkout.date.valueOf()) {
-	     var newDate = new Date(ev.date)
+	   if (ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
+
+	     var newDate = new Date(ev.date);
 	     newDate.setDate(newDate.getDate() + 1);
-	     checkout.setValue(newDate);
+	     checkout.datepicker("update", newDate);
+
 	   }
-	   checkin.hide();
 	   $('#checkOut')[0].focus();
-	 }).data('datepicker');
+	 });
+
+
 	 var checkout = $('#checkOut').datepicker({
-	   onRender: function(date) {
-	     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-	   }
-	 }).on('changeDate', function(ev) {
-	   checkout.hide();
-	 }).data('datepicker');
+	   beforeShowDay: function(date) {
+	     if (!checkin.datepicker("getDate").valueOf()) {
+	       return date.valueOf() >= new Date().valueOf();
+	     } else {
+	       return date.valueOf() > checkin.datepicker("getDate").valueOf();
+	     }
+	   },
+	   autoclose: true
+
+	 }).on('changeDate', function(ev) {});
+	 
+	 /* var checkIn = $('#checkIn').val();
+	 var checkOut = $('#checkOut').val();
+	 
+	 var checkIn = Date.create($('#checkIn').val()).format('{yyyy}-{MM}-{dd}');
+	 var checkOut = Date.create($('#checkOut').val()).addDays(1).format('{yyyy}-{MM}-{dd}'); */
  });
 </script>
 <script>
@@ -142,14 +155,14 @@ input {
 
 .clickable { cursor: pointer; }
 </style>
-<title>::CHECKIN.COM</title>
+<title>Datepicker</title>
 </head>
 <body>
-	<h1>여기는 index.jsp가 분명하다</h1>
+<h1>여기는 index.jsp가 분명하다</h1>
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp"> CHECKIN.COM </a>
+        <a class="navbar-brand" href="index.jsp"> MOMO </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -159,18 +172,13 @@ input {
           Object obj=session.getAttribute("loginInfo");
 		  if(obj == null){
 			%>
-			<!-- 
             <li class="nav-item active" id="login.jsp">
               <a class="nav-link" href="#">Login
-                <span class="sr-only">(current)</span>
+                <!-- <span class="sr-only">(current)</span> -->
               </a>
             </li>
             <li class="nav-item" id="joinForm.jsp">
               <a class="nav-link" href="#">Sign up</a>
-            </li>
-             -->
-            <li class="nav-item" id="EJLogin.jsp">
-            	<a class="nav-link" href="#">Login/Sign up</a>
             </li>
             <%}
 			else{
@@ -189,89 +197,33 @@ input {
       </div>
     </nav>
     
-    <!-- 박 계산 -->
-    <script>
-    window.onload=function(){
-    	alert("aaaaaa");
-    	function ci(){
-			alert('bbbbbbb');    		
-    		alert(document.getElementById("checkIn").value);
-    	}
-    	
-	    function getDDay(year, month, day){
-	        var date = new Date(year, month - 1, day);
-	
-	        var interval = Math.floor((date - todayDate) / (1000 * 60 * 60 * 24) + 1);
-	
-	        return interval;
-	    }
-	    
-	    function dayCalcDisplay(){
-	        var startDay = parseInt(document.getElementById("checkIn").value);
-	
-	        var startDate = new Date(startYear, startMonth - 1, startDay);
-	        var today = new Date(todayDate.getFullYear(),
-	                            todayDate.getMonth(), todayDate.getDate());
-	
-	
-	
-	            var targetYear = parseInt(document.getElementById("targetYear").value);
-	            var targetMonth = parseInt(document.getElementById("targetMonth").value);
-	            var targetDay = parseInt(document.getElementById("targetDay").value);
-	            var interval = getDDay(targetYear, targetMonth, targetDay);
-	
-	            if (!targetYear || targetYear == 0 ||
-	                !targetMonth || targetMonth == 0 ||
-	                !targetDay || targetDay == 0)
-	            {
-	                alert('날짜를 입력해주세요');
-	                return;
-	            }
-	
-	            var targetDate = new Date(targetYear, targetMonth - 1, targetDay);
-	
-	            if (today > targetDate)
-	            {
-	                alert("기준일을 오늘 이후 날짜로 설정하세요");
-	                return;
-	            }
-	
-	            document.getElementById("day3").value = interval;
-	    }
-    }
-    </script>
     
      <header>
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('hotel03_copy.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<form action="list.do" method="post" class="hosearch">
-							<!-- check-in -->
-							<div class="form-group" style="float: left">
-								<input name="checkIn" id="checkIn" onchange="javascript:ci()" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-In">
-							</div>
-							&nbsp;&nbsp;
-							<!-- check-out -->
-							<div class="form-group" style="float: left">
-								<input name="checkOut" id="checkOut" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-Out">
-							</div>
-							
-							<select name="search" id="search">
-								<option value="loc">지역</option>
-								<option value="name">이름</option>
-							</select>
-							<input type="text" id="searchValue" name="searchValue">
-							<input type="button" value="검색" id="test">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+          <div class="carousel-item active" style="background-image: url('hotel03_copy.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+            <form action="list.do" method="post" class="hosearch">
+            <div class="form-group" style="float:left">
+  <input id="checkIn" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="&#xf133;  Check-In">
+</div>
+&nbsp;&nbsp;
+<div class="form-group" style="float:left">
+  <input id="checkOut" type="text" class="form-control clickable input-md" id="DtChkOut" placeholder="&#xf133;  Check-Out">
+</div>
+<select name="search" id="search">
+						<option value="loc">지역</option>
+						<option value="name">이름</option>
+					</select>
+					
+					<input type="text" id="searchValue" name="searchValue">
+					<input type="button" value="검색" id="test">
+</form>
+      	</div></div></div>
+      </div>
+   	</header>
+    
 	<!-- Page Content -->
     <section class="py-5">
         <div class="container">

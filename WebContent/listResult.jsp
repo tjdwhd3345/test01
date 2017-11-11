@@ -26,7 +26,7 @@
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>::HOTELBOOK</title>
+	<title>::CHECKIN.COM</title>
 	<style>
 		nav>ul>li{display:inline-block}
 	</style>
@@ -104,6 +104,7 @@
 							success : function(responseData){
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 									//location.href="index.jsp";
+									location.reload();
 									//location.href="uploadDirectory/hotel02_3.jpg";
 								}else{
 									//location.href="index.jsp";
@@ -174,7 +175,7 @@
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp"> MOMO </a>
+        <a class="navbar-brand" href="index.jsp"> CHECKIN.COM </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -184,13 +185,17 @@
           Object obj=session.getAttribute("loginInfo");
 		  if(obj == null){
 			%>
+			<!-- 
             <li class="nav-item active" id="login.jsp">
               <a class="nav-link" href="#">Login
-                <!-- <span class="sr-only">(current)</span> -->
+                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item" id="joinForm.jsp">
               <a class="nav-link" href="#">Sign up</a>
+            </li>-->
+            <li class="nav-item" id="EJLogin.jsp">
+            	<a class="nav-link" href="#">Login/Sign up</a>
             </li>
             <%}
 			else{

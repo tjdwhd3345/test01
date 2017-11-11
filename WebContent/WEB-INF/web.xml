@@ -9,7 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -59,5 +58,15 @@
   <servlet-mapping>
     <servlet-name>HotelDetailServlet</servlet-name>
     <url-pattern>/detail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReserveServlet</display-name>
+    <servlet-name>ReserveServlet</servlet-name>
+    <servlet-class>control.ReserveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReserveServlet</servlet-name>
+    <url-pattern>/reserve.do</url-pattern>
   </servlet-mapping>
 </web-app>

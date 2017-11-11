@@ -34,6 +34,7 @@
             a:HOVER, a:ACTIVE{font-size: 9pt; color: #F28011; text-decoration: underline;}
             
         </style>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script>
         function mOver(obj){
         	obj.setAttribute("bgcolor", "#F28011");
@@ -41,13 +42,51 @@
         function mOut(obj){
         	obj.setAttribute("bgcolor", "#FFFFFF");
         }
+        
+        $(function(){
+        	$('#prev').click(function(){
+        		var u='calTest.jsp';
+        		var d='year'+<%=year%>;
+        		d+='&month='+<%=month-1%>;
+        		$.ajax({
+        			url:u,
+        			data:d,
+        			method:'GET',
+        			success:function(responseData){
+        				//console.log(responseData);
+        				$('#result').empty();
+        				$('#result').html(responseData);
+        			}
+        		});
+        		return false;
+        	});
+        	$('#next').click(function(){
+        		var u='calTest.jsp';
+        		var d='year'+<%=year%>;
+        		d+='&month='+<%=month+1%>;
+        		//alert(u);
+        		//alert(d);
+        		$.ajax({
+        			url:u,
+        			data:d,
+        			method:'GET',
+        			success:function(responseData){
+        				//console.log(responseData);
+        				$('#result').empty();
+        				$('#result').html(responseData);
+        			}
+        		});
+        		return false;
+        	});
+        });
         </script>
+        <div id="result">
             <table width="210" border="0" cellpadding="1" cellspacing="2">
                 <tr height="30">
                     <td align="center">
-                        <a href="index.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
+                        <a id="prev" href="#">◀</a>
                         <b><%=year %>년 <%=month %>월</b>
-                        <a href="index.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
+                        <a id="next" href="#">▶</a>
                     </td>
                 </tr>
             </table>
@@ -97,3 +136,4 @@
                     out.println("</tr>");
                 %>
             </table>
+		</div>

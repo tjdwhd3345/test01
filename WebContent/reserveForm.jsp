@@ -83,34 +83,6 @@
 				$('.hosearch').submit();
 			});//end click
 			
-			//이미지 슬라이드
-			var count=0;
-			$("#circle>i").eq(0).css("background", "#E8F5FF");
-
-			/*자동롤링 start*/
-			setInterval(function(){
-				count++;
-				if($("#rolling>div:eq(0)").position().left == -1800){
-					$("#rolling>div:eq(0)").append('<img src="hotel01_.jpg" alt="롤링이미지">').animate({left:"-=660px"},
-							function(){
-								$("#rolling>div:eq(0)").css({"left" : 0});
-								$("#rolling>div:eq(0)>img").last().remove();
-							});
-					count=0;
-					$("#circle>i").eq(count).css("background", "#E8F5FF").siblings().css("background", "none");
-				}
-			},2000);
-
-			/* 자동롤링 end */
-			var change=0;
-			$("#circle>i").click(function(){
-				//alert($(this).index());
-				var me = $(this).index();
-				change = (me * (-660)) + "px";
-				$("#rolling>div:eq(0)").animate({left:change});
-				$("#circle>i").eq(me).css("background", "#E8F5FF").siblings().css("background", "none");
-			});
-			//이미지 슬라이드 끝
 			
 			
 		});
@@ -122,7 +94,7 @@
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp"> MOMO </a>
+        <a class="navbar-brand" href="index.jsp"> ::CHECKIN.COM </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -162,15 +134,77 @@
 	<!-- Navigation end -->
 
 	<div id="target" class="container">
-	<h1>reserveForm.jsp</h1>
-	${param.roomname }<br>
-	${param.roombeds }<br>
-	${param.roomprice }<br>
-	${checkIn }<br>
-	${checkOut }<br>
+		<h1>reserveForm.jsp</h1>
+		<H3><strong>예약정보</strong></H3>
+		<div>
+			<div style="display:inline-block">
+				<img src="">방사진
+			</div>
+			<DIV style="display:inline-block">
+				<table class="table">
+					<tr>
+						<td colspan="2" font-size="2rem"><b>${param.hotelname }</b></td>
+					</tr>
+					<tr><td>위치</td><td colspan="2">${param['hoteladdr'] }</td></tr>
+					<tr><td>체크인날짜</td><td>${checkIn }</td></tr>
+					<tr><td>체크아웃날짜</td><td>${checkOut }</td></tr>
+					<tr><td>숙소 위치</td><td>${param['hoteladdr'] }</td></tr>
+				</table>
+			</DIV>
+		</div>
 	</div>
-	
-	
+	<div class="tail"></div>
+	<div id="target" class="container">
+		<h5><strong>객실정보</strong></h5>	
+		<table class="table">
+			<tr>
+				<td>객실</td><td>${param['roomname'] }</td>
+			</tr>
+			<tr>
+				<td>최대인원</td><td>${param['roombeds'] }</td>
+			</tr>
+			<tr>
+				<td>총 금액</td><td>${param['roomprice'] } * n박</td>
+			</tr>
+		</table>
+	</div>
+	<div class="tail"></div>
+	<div id="target" class="container">
+		<h5><strong>고객님의 정보를 입력해주세요.</strong></h5>
+		<form action="reserve.do" method="post">
+		<input type="hidden" name="hotelnum" value="${param['hotelnum'] }">
+		<input type="hidden" name="roomnum" value="${param['roomnum'] }">
+		<input type="hidden" name="checkIn" value="${checkIn }">
+		<input type="hidden" name="checkOut" value="${checkOut }">
+		<input type="hidden" name="price" value="${param['roomprice'] }">
+		
+		<table class="table">
+			<tr>
+				<td>이름</td>
+				<td><input type="text" style="width:80%;" name="username" value="${loginInfo.name }" placeholder="이름을 입력해주세요."></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" style="width:80%;" name="useremail" value="${loginInfo.email }"placeholder="이메일을 입력해주세요."></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td><input type="text" style="width:80%;" name="useretel" placeholder="전화번호를 입력해주세요."></td>
+			</tr>
+			
+		</table>
+		<center><p>계속 진행함으로써 <a href="#">이용약관</a> 및 <a href="#">개인정보 처리방침</a>에 동의하게 됩니다.</p></center>
+		<span style="display:inline; float:right"><input type="button" id="reservebtn" value="진행하기"></span>
+		
+		</form>
+		
+	</div>
+	<style>
+	.tail {
+	   height: 50px;
+	}
+	</style>
+	<div class="tail"></div>
 	<!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
