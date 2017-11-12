@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>예약정보::HOTELBOOK</title>
+	<title>예약정보::CHECKIN.COM</title>
 
 	<% request.setCharacterEncoding("utf-8"); %>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -83,7 +83,11 @@
 				$('.hosearch').submit();
 			});//end click
 			
-			
+			//예약하기 버튼 눌렀을 때
+			$("#reservebtn").click(function(){
+				alert('예약이 완료되었습니다.');
+				$("#rsvform").submit();
+			});
 			
 		});
 	</script>
@@ -117,7 +121,7 @@
 				User u=(User) obj;
             %>
             <li class="nav-link"><%=u.getEmail() %>님</li>
-            <li class="nav-item" id="">
+            <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약확인</a>
             </li>
             <li class="nav-item" id="logout.do">
@@ -171,7 +175,7 @@
 	<div class="tail"></div>
 	<div id="target" class="container">
 		<h5><strong>고객님의 정보를 입력해주세요.</strong></h5>
-		<form action="reserve.do" method="post">
+		<form action="reserve.do" method="post" id="rsvform">
 		<input type="hidden" name="hotelnum" value="${param['hotelnum'] }">
 		<input type="hidden" name="roomnum" value="${param['roomnum'] }">
 		<input type="hidden" name="checkIn" value="${checkIn }">

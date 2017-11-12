@@ -202,7 +202,7 @@
 				User u=(User) obj;
             %>
             <li class="nav-link"><%=u.getEmail() %>님</li>
-            <li class="nav-item" id="">
+            <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약확인</a>
             </li>
             <li class="nav-item" id="logout.do">

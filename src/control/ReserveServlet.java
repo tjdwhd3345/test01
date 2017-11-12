@@ -23,8 +23,8 @@ public class ReserveServlet extends HttpServlet {
 	    
 	    String bookemail=request.getParameter("useremail");
 	    String bookname=request.getParameter("username");
-	    String hotelno=request.getParameter("hotelno");
-	    String roomno=request.getParameter("roomno");
+	    String hotelno=request.getParameter("hotelnum");
+	    String roomno=request.getParameter("roomnum");
 	    String checkIn=request.getParameter("checkIn");
 	    String checkOut=request.getParameter("checkOut");
 	    String price=request.getParameter("price");

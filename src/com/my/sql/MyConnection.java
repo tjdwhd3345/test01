@@ -19,7 +19,8 @@ public class MyConnection {
         //url:"프로토콜:사용db:호스트:포트/DB명
         //user:사용자계정
         //password:계정 비밀번호
-        String url="jdbc:mysql://192.168.0.141:3306/mydb3?useUnicode=true&characterEncoding=utf8";
+        //String url="jdbc:mysql://192.168.0.141:3306/mydb3?useUnicode=true&characterEncoding=utf8";
+        String url="jdbc:mysql://218.153.215.249:3306/mydb3?useUnicode=true&characterEncoding=utf8";
         String user="mo";
         String password="1234";
         con=DriverManager.getConnection(url, user, password);

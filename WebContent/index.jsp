@@ -20,6 +20,7 @@
     <script src="BootTestCss/vendor/jquery/jquery.min.js"></script>
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- bootstrap end -->
+    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
 <script src="http://kylemitofsky.com/libraries/libraries/bootstrap-datepicker.js"></script>
@@ -63,20 +64,9 @@ $(function(){ //jQuery
 	}//end for
 	
 	
-	//hotel list를 불러와라
-	//$(".hosearch").click(function(){
-	$("#test").click(function(){
-		//var $d=$("#searchValue").val()+$("#search").val();
-		
-		var $d=$('.hosearch').serialize();
-		$('.hosearch').submit();
-		
-	});//end click
-});
-</script>
-<script>
- $(function(){
-	 var nowTemp = new Date();
+	
+	//달력 jquery
+	var nowTemp = new Date();
 	 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	  
 	 var checkin = $('#checkIn').datepicker({
@@ -99,30 +89,26 @@ $(function(){ //jQuery
 	 }).on('changeDate', function(ev) {
 	   checkout.hide();
 	 }).data('datepicker');
- });
-</script>
-<script>
-$(function(){
-	$('#bookAdd').click(function(){
-		var $checkIn = $('#checkIn').val();
-		var $checkOut = $('#checkOut').val();
+	 
+	 
+	//hotel list를 불러와라
+	//$(".hosearch").click(function(){
+	$("#test").click(function(){
+		//var $d=$("#searchValue").val()+$("#search").val();
 		
-		$.ajax({
-			url:"book.do",
-			type:"POST",
-			data:{"checkIn":$checkIn, "checkOut":$checkOut},
-			success:function(data){
-				var jsonObj = JSON.parse(data);
-				if(jsonObj.status==1){
-					msg="Check_In: "+$checkIn+"Check_Out: "+$checkOut
-					window.location.href="datepickerNext.jsp";
-				}else{
-					msg="날짜를 다시 선택해 주세요";
-				}
-				alert(msg);
-			}
-		});
-	});
+		/*
+		alert('aaaaaaa');
+		var date1 = new Date($("#checkIn").datepicker("getDate"));
+		var date2 = new Date($("#checkOut").datepicker("getDate"));
+		alert(date2-date1);
+			*/
+			
+		var $d=$('.hosearch').serialize();
+		$('.hosearch').submit();
+			
+	});//end click	 
+	 
+	 
 });
 </script>
 <style>
@@ -177,7 +163,7 @@ input {
 				User u=(User) obj;
             %>
             <li class="nav-link"><%=u.getEmail() %>님</li>
-            <li class="nav-item" id="">
+            <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약확인</a>
             </li>
             <li class="nav-item" id="logout.do">
@@ -190,11 +176,12 @@ input {
     </nav>
     
     <!-- 박 계산 -->
+    <!-- 
     <script>
     window.onload=function(){
-    	alert("aaaaaa");
+    	//alert("aaaaaa");
     	function ci(){
-			alert('bbbbbbb');    		
+			//alert('bbbbbbb');    		
     		alert(document.getElementById("checkIn").value);
     	}
     	
@@ -240,7 +227,7 @@ input {
 	    }
     }
     </script>
-    
+    -->
      <header>
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner" role="listbox">

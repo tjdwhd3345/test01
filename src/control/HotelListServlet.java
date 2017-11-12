@@ -38,8 +38,8 @@ public class HotelListServlet extends HttpServlet {
         String search=request.getParameter("search");
         String checkIn=request.getParameter("checkIn");
         String checkOut=request.getParameter("checkOut");
-        System.out.println(checkIn);
-        System.out.println(checkOut);
+        //System.out.println(checkIn);
+        //System.out.println(checkOut);
         //request.setAttribute("searchValue", searchValue);
         
         HttpSession session=request.getSession();
@@ -54,7 +54,8 @@ public class HotelListServlet extends HttpServlet {
             SAXBuilder builder=new SAXBuilder();
             System.out.println("SAX success");
             builder.setIgnoringElementContentWhitespace(true);  //파싱할때 공백은 무시
-            File xmlFile=new File("C:\\Users\\한국정보기술\\Desktop\\myjava\\test01\\WebContent\\public_data.xml");
+            //File xmlFile=new File("C:\\Users\\한국정보기술\\Desktop\\myjava\\test01\\WebContent\\public_data.xml");
+            File xmlFile=new File("C:\\Users\\tjdwh\\Desktop\\f_project\\test01\\WebContent\\public_data.xml");
             FileInputStream fin=new FileInputStream(xmlFile);   //예외처리
             Document doc=builder.build(fin);    //xml파일을 document객체에 담는다
             

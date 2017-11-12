@@ -74,7 +74,7 @@
 				    		//$(location).attr("href", "index.jsp");
 				    		window.history.back();
 						} else {
-							msg ="로그인 실패";
+							msg ="아이디 또는 비밀번호를 확인해주세요.";
 						}
 				    	window.alert(msg);	//경고창 띄우기
 				    	//$(location).attr("href", "index.jsp");

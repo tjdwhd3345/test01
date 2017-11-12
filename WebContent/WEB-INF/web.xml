@@ -69,4 +69,14 @@
     <servlet-name>ReserveServlet</servlet-name>
     <url-pattern>/reserve.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReservelistServlet</display-name>
+    <servlet-name>ReservelistServlet</servlet-name>
+    <servlet-class>control.ReservelistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReservelistServlet</servlet-name>
+    <url-pattern>/reserveList.do</url-pattern>
+  </servlet-mapping>
 </web-app>
