@@ -149,10 +149,9 @@
 		});
 		</script><!-- sign up -->
 		
-		<title>Login/Registration Form Transition</title>
 		<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 		<link rel="stylesheet" href="EJcss/style.css">
-		<title>EJ LOGIN FROM</title>
+		<title>로그인/회원가입::CHECKIN.COM</title>
 	</head>
 <body>
 <p class="tip"></p>

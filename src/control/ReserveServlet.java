@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +39,16 @@ public class ReserveServlet extends HttpServlet {
 	            checkOut, 
 	            Integer.parseInt(price));
 	    
-	    reDAO.addReserve(r);
+	    try {
+	        Reserve red=new Reserve();
+            red=reDAO.addReserve(r);
+            request.setAttribute("reserved", red);
+        } catch (SQLException e) {
+            System.out.println("예약추가하다가 DAO에서 예외발생함 데이터는 롤백됨");
+            e.printStackTrace();
+        }
 	    
-	    RequestDispatcher rd=request.getRequestDispatcher("");
+	    RequestDispatcher rd=request.getRequestDispatcher("reserveSuccess.jsp");
 	    rd.forward(request, response);
 	}
 

@@ -194,7 +194,7 @@
             %>
             <li class="nav-link"><%=u.getEmail() %>님</li>
             <li class="nav-item" id="reserveList.do">
-              <a class="nav-link" href="#">예약확인</a>
+              <a class="nav-link" href="#">예약조회</a>
             </li>
             <li class="nav-item" id="logout.do">
               <a class="nav-link" href="#">로그아웃</a>

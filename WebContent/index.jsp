@@ -96,13 +96,13 @@ $(function(){ //jQuery
 	$("#test").click(function(){
 		//var $d=$("#searchValue").val()+$("#search").val();
 		
-		/*
-		alert('aaaaaaa');
-		var date1 = new Date($("#checkIn").datepicker("getDate"));
-		var date2 = new Date($("#checkOut").datepicker("getDate"));
-		alert(date2-date1);
-			*/
-			
+		var date1 = new Date($("#checkIn").val());
+		var date2 = new Date($("#checkOut").val());
+		var nights=(date2-date1) / 1000 / 60 / 60 / 24;
+		//alert(nights);
+		$("#nights").val(nights);
+		//alert($("#nights").val());
+		
 		var $d=$('.hosearch').serialize();
 		$('.hosearch').submit();
 			
@@ -164,7 +164,7 @@ input {
             %>
             <li class="nav-link"><%=u.getEmail() %>님</li>
             <li class="nav-item" id="reserveList.do">
-              <a class="nav-link" href="#">예약확인</a>
+              <a class="nav-link" href="#">예약조회</a>
             </li>
             <li class="nav-item" id="logout.do">
               <a class="nav-link" href="#">로그아웃</a>
@@ -175,59 +175,6 @@ input {
       </div>
     </nav>
     
-    <!-- 박 계산 -->
-    <!-- 
-    <script>
-    window.onload=function(){
-    	//alert("aaaaaa");
-    	function ci(){
-			//alert('bbbbbbb');    		
-    		alert(document.getElementById("checkIn").value);
-    	}
-    	
-	    function getDDay(year, month, day){
-	        var date = new Date(year, month - 1, day);
-	
-	        var interval = Math.floor((date - todayDate) / (1000 * 60 * 60 * 24) + 1);
-	
-	        return interval;
-	    }
-	    
-	    function dayCalcDisplay(){
-	        var startDay = parseInt(document.getElementById("checkIn").value);
-	
-	        var startDate = new Date(startYear, startMonth - 1, startDay);
-	        var today = new Date(todayDate.getFullYear(),
-	                            todayDate.getMonth(), todayDate.getDate());
-	
-	
-	
-	            var targetYear = parseInt(document.getElementById("targetYear").value);
-	            var targetMonth = parseInt(document.getElementById("targetMonth").value);
-	            var targetDay = parseInt(document.getElementById("targetDay").value);
-	            var interval = getDDay(targetYear, targetMonth, targetDay);
-	
-	            if (!targetYear || targetYear == 0 ||
-	                !targetMonth || targetMonth == 0 ||
-	                !targetDay || targetDay == 0)
-	            {
-	                alert('날짜를 입력해주세요');
-	                return;
-	            }
-	
-	            var targetDate = new Date(targetYear, targetMonth - 1, targetDay);
-	
-	            if (today > targetDate)
-	            {
-	                alert("기준일을 오늘 이후 날짜로 설정하세요");
-	                return;
-	            }
-	
-	            document.getElementById("day3").value = interval;
-	    }
-    }
-    </script>
-    -->
      <header>
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
@@ -251,6 +198,7 @@ input {
 								<option value="name">이름</option>
 							</select>
 							<input type="text" id="searchValue" name="searchValue">
+							<input type="hidden" id="nights" name="nights"> 
 							<input type="button" value="검색" id="test">
 						</form>
 					</div>
@@ -274,5 +222,3 @@ input {
     </footer>
 </body>
 </html>
-
-

@@ -9,7 +9,7 @@ public class Reserve {
     private String checkIn;
     private String checkOut;
     private int price;
-    
+    private String hotelname;
     
     
     public Reserve() {
@@ -36,6 +36,12 @@ public class Reserve {
     }
     
     
+    public String getHotelname() {
+        return hotelname;
+    }
+    public void setHotelname(String hotelname) {
+        this.hotelname = hotelname;
+    }
     public int getBookno() {
         return bookno;
     }

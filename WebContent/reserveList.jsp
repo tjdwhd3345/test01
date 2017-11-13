@@ -1,6 +1,7 @@
+<%@page import="com.my.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,11 +41,120 @@
 	#circle i{display:inline-block; padding:5px; margin:auto 0px; border-radius:10px; cursor:pointer; font-weight: bold;}
 	</style>
 	<!-- bootstrap end -->
+	
+	<!-- 상단 index -->
+	<script>
+		$(function(){ //jQuery
+			var $liArr = $("nav>div>div>ul>li");
+			for(var i=0; i<$liArr.length; i++){
+				var f = function(index){
+					var $liObj = $liArr[i];
+					
+					$($liObj).click(function(){       
+						var $url = $($liObj).attr("id");
+						//alert($url);
+						/* if($url == 'login.jsp' || $url == 'joinForm.jsp'){
+							location.href=$url;
+						} */
+						$.ajax( {
+							url: $url,
+							method : 'GET',
+							success : function(responseData){
+								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
+									location.href="index.jsp";
+									//location.href="uploadDirectory/hotel02_3.jpg";
+								}else{
+									//location.href="index.jsp";
+									//$("#wrapper>section").empty();
+									//$("#wrapper>section").html(responseData);
+									location.href=$url;
+								}
+							}
+						});
+						return false;
+					});//end click
+				};
+				f(i);
+			}//end for
+			
+			//hotel list를 불러와라
+			$("#test").click(function(){
+				//var $d=$("#searchValue").val()+$("#search").val();
+				var $d=$('.hosearch').serialize();
+				$('.hosearch').submit();
+			});//end click
+			
+			//예약하기 버튼 눌렀을 때
+			$("#reservebtn").click(function(){
+				alert('예약이 완료되었습니다.');
+				$("#rsvform").submit();
+			});
+			
+		});
+	</script>
 </head>
 <body>
+
+	<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.jsp"> CHECKIN.COM </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+          <% 
+          Object obj=session.getAttribute("loginInfo");
+		  if(obj == null){
+			%>
+            <li class="nav-item active" id="login.jsp">
+              <a class="nav-link" href="#">Login
+                <!-- <span class="sr-only">(current)</span> -->
+              </a>
+            </li>
+            <li class="nav-item" id="joinForm.jsp">
+              <a class="nav-link" href="#">Sign up</a>
+            </li>
+            <%}
+			else{
+				User u=(User) obj;
+            %>
+            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-item" id="reserveList.do">
+              <a class="nav-link" href="#">예약조회</a>
+            </li>
+            <li class="nav-item" id="logout.do">
+              <a class="nav-link" href="#">로그아웃</a>
+            </li>
+            <li class="nav-item" id="list.do">
+              <a class="nav-link" href="#">목록</a>
+            </li>
+            <%} %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	<!-- Navigation end -->
+	
 	<div id="target" class="container">
 		<h1>reserveList.jsp</h1>
-	
+		<c:set var="rList" value="${requestScope.reserveList }"/>
+		<c:choose>
+			<c:when test="${empty rList}">
+				예약내역이 없음
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="reserve" items="${rList }">
+					예약번호 ${reserve.bookno }<br>
+					호텔이름 ${reserve.hotelname }<br>
+					호텔번호${reserve.hotelno }<br>
+					체크인 ${reserve.checkIn }<br>
+					체크아웃 ${reserve.checkOut }<br>
+					<hr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

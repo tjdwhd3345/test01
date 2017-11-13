@@ -20,10 +20,7 @@ import com.oracle.jrockit.jfr.RequestDelegate;
  * Servlet implementation class ReservelistServlet
  */
 public class ReservelistServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doService(request, response);
-	}
-	protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//한글 인코딩
 		request.setCharacterEncoding("utf-8");

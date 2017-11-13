@@ -29,7 +29,8 @@ import com.my.vo.HotelList;
 public class HotelListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
 	    //한글깨짐 방지
         request.setCharacterEncoding("utf-8");
@@ -38,6 +39,7 @@ public class HotelListServlet extends HttpServlet {
         String search=request.getParameter("search");
         String checkIn=request.getParameter("checkIn");
         String checkOut=request.getParameter("checkOut");
+        String nights=request.getParameter("nights");
         //System.out.println(checkIn);
         //System.out.println(checkOut);
         //request.setAttribute("searchValue", searchValue);
@@ -49,13 +51,14 @@ public class HotelListServlet extends HttpServlet {
         
         session.setAttribute("checkIn", checkIn);
         session.setAttribute("checkOut", checkOut);
+        session.setAttribute("nights", nights);
         
         try {
             SAXBuilder builder=new SAXBuilder();
             System.out.println("SAX success");
             builder.setIgnoringElementContentWhitespace(true);  //파싱할때 공백은 무시
-            //File xmlFile=new File("C:\\Users\\한국정보기술\\Desktop\\myjava\\test01\\WebContent\\public_data.xml");
-            File xmlFile=new File("C:\\Users\\tjdwh\\Desktop\\f_project\\test01\\WebContent\\public_data.xml");
+            File xmlFile=new File("C:\\Users\\한국정보기술\\Desktop\\myjava\\test01\\WebContent\\public_data.xml");
+            //File xmlFile=new File("C:\\Users\\tjdwh\\Desktop\\f_project\\test01\\WebContent\\public_data.xml");
             FileInputStream fin=new FileInputStream(xmlFile);   //예외처리
             Document doc=builder.build(fin);    //xml파일을 document객체에 담는다
             
