@@ -113,7 +113,7 @@ $(function(){ //jQuery
 <style>
 input {
   padding:10px;
-	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+  font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
   font-style: normal;
   font-weight: normal;
   text-decoration: inherit;
@@ -192,7 +192,7 @@ input {
 						<form action="list.do" method="post" class="hosearch" style="display:inline-block;">
 							<!-- check-in -->
 							<div class="form-group" style="float: left">
-								<input name="checkIn" id="checkIn" onchange="javascript:ci()" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-In">
+								<input name="checkIn" id="checkIn" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-In">
 							</div>
 							&nbsp;&nbsp;
 							<!-- check-out -->
@@ -204,7 +204,7 @@ input {
 								<option value="loc">지역</option>
 								<option value="name">이름</option>
 							</select>
-							<input type="text" id="searchValue" name="searchValue">
+							<input type="text" id="searchValue" name="searchValue" style="width:400px" placeholder="지역 또는 호텔명을 입력해주세요">
 							<input type="hidden" id="nights" name="nights"> 
 							<input type="button" value="검색" id="test">
 						</form>

@@ -371,13 +371,8 @@
 	.tail {
 	   height: 50px;
 	}
-	footer{
-	position:absolute;
-	bottom:0;
-	left:0;
-	right:0;
-	}
 	</style>
+	<div id="tail"></div>
 	<div id="tail"></div>
 	<div id="target" class="container">
 		<caption><b>이용가능 서비스</b></caption>
@@ -446,7 +441,23 @@
 	 -->
 	<div id="target" class="container">
 	<p><b>이용후기</b>이용후기가 들어갈 div위치</p>
-	
+		<div>
+			
+		</div>
+		<div>
+			<table width="100%" text-align="center">
+				<tr>
+					<th width="20%"><label>이용자이름</label> <br><label>이메일</label></th>
+					<th width="20%">이용평점</th>
+					<th>후기 내용</th>
+				</tr>
+				<tr >
+					<td><label>이용자1</label><br><label>email@email.com</label></td>
+					<td>4.3</td>
+					<td>깨끗하고 좋아용</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	
 	<!-- Footer -->

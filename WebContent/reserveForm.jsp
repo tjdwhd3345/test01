@@ -146,9 +146,9 @@
 			<DIV style="display:inline-block; position:relative; width:50%; margin:0px auto; vertical-align:middle;">
 				<table class="table">
 					<tr>
-						<td colspan="2" font-size="2rem"><b>${param.hotelname }</b></td>
+						<td colspan="2" font-size="2rem"><b>${param['hotelname'] }</b></td>
 					</tr>
-					<tr><td>위치</td><td>${param['hoteladdr'] }</td></tr>
+					<tr><td>위치</td><td>${param['hoteladdr'] }${requestScope.hoteladdr }</td></tr>
 					<tr><td>체크인날짜</td><td>${checkIn }</td></tr>
 					<tr><td>체크아웃날짜</td><td>${checkOut }</td></tr>
 					<!-- <tr><td>숙소 위치</td><td>${param['hoteladdr'] }</td></tr> -->

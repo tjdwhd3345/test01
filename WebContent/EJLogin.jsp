@@ -22,7 +22,7 @@
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- bootstrap end -->
     
-	<title>Sign in!</title>
+	<title>SIGN-IN/SIGN-UP::CHECKIN.COM</title>
 </head>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -233,7 +233,7 @@
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp"> MOMO </a>
+        <a class="navbar-brand" href="index.jsp"> CHECKIN.COM </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -291,12 +291,12 @@
 			<h2>Member Join</h2>
 				<label>
 				<span>Email</span>
-				<input id="email" name="email" type="email" value="bbb@ccc.d">
+				<input id="email" name="email" type="email" value="bbb@bbb.b">
 				</label>
 				
 				<label>
 				<span>Password</span>
-				<input id="pwd" name="pwd" type="password" value="1234">
+				<input id="pwd" name="pwd" type="password">
 				</label>
 				
 				<label>

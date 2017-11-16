@@ -9,13 +9,14 @@ import java.util.List;
 
 import com.my.sql.MyConnection;
 import com.my.vo.Reserve;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class ReserveDAO {
     public ReserveDAO() {}
     
     
     //예약 추가
-    public Reserve addReserve(Reserve r) throws SQLException {
+    public Reserve addReserve(Reserve r) throws SQLException  {
         Connection con=null;
         PreparedStatement pstmt=null;
         ResultSet rs=null;
@@ -60,6 +61,9 @@ public class ReserveDAO {
             re.setCheckOut(rs.getString("check_out"));
             
             con.commit();
+        } catch (MySQLIntegrityConstraintViolationException e) {
+            con.rollback();
+            throw new MySQLIntegrityConstraintViolationException();
         } catch (Exception e) {
             e.printStackTrace();
             con.rollback();

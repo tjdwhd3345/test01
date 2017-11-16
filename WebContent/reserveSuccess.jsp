@@ -84,12 +84,6 @@
 				$('.hosearch').submit();
 			});//end click
 			
-			//예약하기 버튼 눌렀을 때
-			$("#reservebtn").click(function(){
-				alert('예약이 완료되었습니다.');
-				$("#rsvform").submit();
-			});
-			
 		});
 	</script>
 </head>

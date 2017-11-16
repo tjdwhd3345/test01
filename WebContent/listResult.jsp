@@ -31,6 +31,7 @@
 		nav>ul>li{display:inline-block}
 	</style>
 	<!-- bootstrap end -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	<!-- 달력 css -->
 	<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
@@ -38,13 +39,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://kylemitofsky.com/libraries/libraries/datepicker.css">
 	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css"> -->
 	<!-- 달력 css 끝 -->
 	
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Hotel List</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<!-- 
 	<script>
 		$(function() {
@@ -120,56 +121,68 @@
 				f(i);
 			}//end for
 			
-			//hotel list를 불러와라
-			$("#test").submit(function(){
-				//var $d=$("#searchValue").val()+$("#search").val();
-				var $d=$('.hosearch').serialize();
-				$('hosearch').submit();
-			});//end click
-			
-			
-			//달력
+			//달력 jquery
 			var nowTemp = new Date();
 			 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
+			  
 			 var checkin = $('#checkIn').datepicker({
-
-			   beforeShowDay: function(date) {
-			     return date.valueOf() >= now.valueOf();
-			   },
-			   autoclose: true
-
-			 }).on('changeDate', function(ev) {
-			   if (ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
-
-			     var newDate = new Date(ev.date);
-			     newDate.setDate(newDate.getDate() + 1);
-			     checkout.datepicker("update", newDate);
-
+			   onRender: function(date) {
+			     return date.valueOf() < now.valueOf() ? 'disabled' : '';
 			   }
+			 }).on('changeDate', function(ev) {
+			   if (ev.date.valueOf() > checkout.date.valueOf()) {
+			     var newDate = new Date(ev.date)
+			     newDate.setDate(newDate.getDate() + 1);
+			     checkout.setValue(newDate);
+			   }
+			   checkin.hide();
 			   $('#checkOut')[0].focus();
-			 });
-
-
+			 }).data('datepicker');
 			 var checkout = $('#checkOut').datepicker({
-			   beforeShowDay: function(date) {
-			     if (!checkin.datepicker("getDate").valueOf()) {
-			       return date.valueOf() >= new Date().valueOf();
-			     } else {
-			       return date.valueOf() > checkin.datepicker("getDate").valueOf();
-			     }
-			   },
-			   autoclose: true
-
-			 }).on('changeDate', function(ev) {});
-			 //달력 끝
+			   onRender: function(date) {
+			     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			   }
+			 }).on('changeDate', function(ev) {
+			   checkout.hide();
+			 }).data('datepicker');
 			 
 			 
-			 
+			//$(".hosearch").click(function(){
+			$("#test").click(function(){
+				//var $d=$("#searchValue").val()+$("#search").val();
+				var date1 = new Date($("#checkIn").val());
+				var date2 = new Date($("#checkOut").val());
+				var nights=(date2-date1) / 1000 / 60 / 60 / 24;
+				//alert(nights);
+				$("#nights").val(nights);
+				//alert($("#nights").val());
+					
+				var $d=$('.hosearch').serialize();
+				$('.hosearch').submit();
+						
+			});//end click
+			
 		});
 	</script>
+	<style>
+	input {
+	  padding:10px;
+	  font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+	  font-style: normal;
+	  font-weight: normal;
+	  text-decoration: inherit;
+	  border-radius: 0 !important;
+	}
 	
+	.form-control {
+	  border-radius: 0 !important;
+	  font-size: 12x;
+	}
+	
+	.clickable { cursor: pointer; }
+	</style>	
 </head>
+
 <body>
 
 	<!-- Navigation -->
@@ -215,35 +228,53 @@
           </ul>
         </div>
       </div>
+      
+      <!-- 상단고정 검색바 -->
+      <div class="carousel-caption d-none d-md-block" style="text-align:center; left:0px;width:100%; height:80px;">
+        <form action="list.do" method="post" class="hosearch" style="display:inline-block;">
+        	<!-- check-in -->
+			<div class="form-group" style="float:left">
+				<input name="checkIn" id="checkIn" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="&#xf133;  Check-In" value="${sessionScope.checkIn }">
+			</div>
+			&nbsp;&nbsp;
+			<!-- check out -->
+			<div class="form-group" style="float:left">
+				<input name="checkOut" id="checkOut" type="text" class="form-control clickable input-md" id="DtChkOut" placeholder="&#xf133;  Check-Out" value="${sessionScope.checkOut }">
+			</div>
+			
+			<select name="search" id="search" class="form-control clickable input-md" style="display:inline; width:100px">
+				<c:set var="searchcate" value="${param['search'] }"/>
+				<option value="loc" <c:if test="${searchcate eq 'loc' }"> selected</c:if>>
+				지역</option>
+				<option value="name" <c:if test="${searchcate eq 'name' }"> selected</c:if>>
+				이름</option>
+			</select>
+			<input type="text" id="searchValue" name="searchValue" style="width:400px" placeholder="지역 또는 호텔명을 입력해주세요" value="${param['searchValue']}">
+			<input type="hidden" id="nights" name="nights">
+			<input type="button" value="검색" id="test">
+		</form>
+		</div>
+		<!-- 상단고정 검색바 끝 -->
+		
     </nav>
     
-    <!-- 검색기능하고나서 나중에 상단에 서치바도 배치해야됨. -->
-    <div> 
-    <!-- Page Content -->
-        <div class="container">
-        <form action="list.do" method="post" class="hosearch">
-			<select name="search">
-				<option value="loc">지역</option>
-				<option value="name">이름</option>
-			</select>
-			<input type="text" id="searchValue" name="searchValue">
-			<div class="form-group" style="float:left">
-  <input id="checkIn" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="&#xf133;  Check-In">
-</div>
-
-			&nbsp;&nbsp;
-<div class="form-group" style="float:left">
-  <input id="checkOut" type="text" class="form-control clickable input-md" id="DtChkOut" placeholder="&#xf133;  Check-Out">
-</div>
-			<input type="submit" value="검색" id="test">
-		</form>
-		<!-- <input type="button" id="test" value="test">--><!-- hotel list를 불러와라 -->
-        </div>
-    </div> 
+    <style>
+    .tail{height: 150px;}
+    .carousel-caption {
+                 /*opacity : 0.6;*/
+                 background:rgba(112,112,112,1);
+                 /*background:rgba(100,100,100,0.6);*/
+                 filter: alpha(opacity=60);
+                 -moz-opacity:0.6;
+                 -khtml-opacity: 0.6;
+                 position:absolute;
+                 top:50px;
+                }
+    </style>
+    <div class="tail"></div>
     
-	<div id="target" class="container">
-	
-		<table border="1" style="margin-top:100px; margin-bottom:50px;">
+    <div class="container" style="display:block;">
+		<table border="1" style="margin-bottom:50px; display:inline;">
 			<tr class="bg-dark" style="color:#FFFFFF" align="center">
 				<c:forEach var="values" items="${hList}">
 					<th>${values.rowNum}</th>
@@ -258,14 +289,14 @@
 			<tr>
 				<!-- 검색 키워드가 장소인지 이름인지 -->
 				<c:choose>
-					<c:when test="${param['search'] eq 'loc'}">
+					<c:when test="${searchcate eq 'loc'}">
 						<c:set var="site" value="${values.siteWhlAddr}"/>
 					</c:when>
-					<c:when test="${param['search'] eq 'name'}">
+					<c:when test="${searchcate eq 'name'}">
 						<c:set var="site" value="${values.bplcNm}"/>
 					</c:when>
 				</c:choose>
-				<!-- 검색 키워드를 포함한 업체만 출력 -->
+				<!-- 검색 키워드를 포함한 호텔만 출력 -->
 				<c:if test="${fn:contains(site, seV)}">
 					<td>${values.rowNum}</td>
 					<td><a href="#" id="dd" 
@@ -304,6 +335,7 @@
 		</script>
 		
 	</div>
+	<div style="height:50px;"></div>
 	<!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

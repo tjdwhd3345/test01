@@ -58,20 +58,25 @@ public class ReserveServlet extends HttpServlet {
 	            checkIn, 
 	            checkOut, 
 	            Integer.parseInt(price));
-	    
+	    RequestDispatcher rd=null;
+	    String nexturl="";
 	    try {
 	        Reserve red=new Reserve();
             red=reDAO.addReserve(r);    //book테이블에 예약추가
             request.setAttribute("reserved", red);  
+            nexturl="reserveSuccess.jsp";   //추가 성공시
+            
         } catch (SQLException e) {
             System.out.println("예약추가하다가 DAO에서 예외발생함. 데이터는 롤백됨");
+            //response.sendRedirect("reserveForm.jsp");
+            nexturl="reserveForm.jsp";  //추가 실패시
             e.printStackTrace();
         }
 	    
 	    //response.sendRedirect("reserveSuccess.jsp");
-	    
-	    RequestDispatcher rd=request.getRequestDispatcher("reserveSuccess.jsp");
+	    rd=request.getRequestDispatcher(nexturl);
 	    rd.forward(request, response);
+	    
 	}
 
 }
