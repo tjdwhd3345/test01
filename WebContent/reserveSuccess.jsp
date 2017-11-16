@@ -137,24 +137,65 @@
 	<!-- Navigation end -->
 	
 	<style>
-	.tail {
-	   height: 50px;
+	.tail {height: 50px;}
+	span{color:blue;}
+	span.msg{color:sky blue;}
+	input[type=button]{
+		align:center;
 	}
 	</style>
+	
 	<div class="tail"></div>
 	<div id="target" class="container">
 		<div class="tail"></div>
 		<h3>예약완료</h3>
-		<div id="target" class="container" style="border:1px solid;">
+		<div id="target" class="container" style="border:1px solid; padding-top:30px; padding-bottom:30px;">
 		<!-- <h1>reservesuccess.jsp</h1> -->
-		<span font-color="blue"><b>고객님의 예약이 완료되었습니다.</b></span><br><br>
+		<span class="msg"><b>고객님의 예약이 완료되었습니다.</b></span><br><br>
 		<c:set var="reserve" value="${reserved }"/>
-		<label>예약번호</label><br> ${reserve.bookno }<br><br>
+		<label>예약번호</label><br> <span>${reserve.bookno }</span><br><br>
 		<h5><strong>${reserve.hotelname }</strong></h5><br>
-		체크인 ${reserve.checkIn }<br>
-		체크아웃 ${reserve.checkOut }<br>
-		결제금액 ${reserve.price }<br>
-		</div>
+		<table width="40%">
+			<tr>
+				<td>체크인</td><td>${reserve.checkIn }</td>
+			</tr>
+			<tr>
+				<td>체크아웃</td><td>${reserve.checkOut }</td>
+			</tr>
+			<tr>
+				<td>결제금액</td><td>${reserve.price } 원</td>
+			</tr>
+		</table>
+		</div><br>
+		<input type="button" id="reslistbtn" name="reslistbtn" value="내 예약목록 보기">
 	</div>
+	<script>
+		$(function(){
+			$("#reslistbtn").click(function(){
+				<c:choose>
+					<c:when test="${empty sessionScope.loginInfo }">
+						alert("세션이 만료되어 로그인이 필요합니다.");
+						location.href="EJLogin.jsp";
+					</c:when>
+					<c:otherwise>
+						location.href="reserveList.do";
+					</c:otherwise>
+				</c:choose>
+			});
+		});
+	</script>
+	
+	<style>
+	.tail {height: 50px;}
+	</style>
+	<div class="tail"></div>
+	<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <!-- Footer end -->
 </body>
 </html>

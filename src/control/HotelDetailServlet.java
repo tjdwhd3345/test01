@@ -42,10 +42,16 @@ public class HotelDetailServlet extends HttpServlet {
 	    //호텔의 객실들을 list로 받아온다.
 	    List<Room> rList=rDAO.selectRoom(num);
 	    request.setAttribute("ro", rList);
+	    
+	    //각 방의 이미지경로를 list로 받아온다.
+	    List<Room> rimgList=rDAO.getImg(num);
+	    request.setAttribute("roomimg", rimgList);
+	    
 	    //호텔 제공서비스들을 HotelService 객체로 받아온다.
 	    //HotelService hs=hsDAO.selectService(num);
 	    List<HotelService> hs=hsDAO.selectService(num);
 	    request.setAttribute("hs", hs);
+	    
 	    //모든 제공서비스를 객체로 받아온다.
 	    List<TotalService> ts=tsDAO.selectAllService();
 	    request.setAttribute("ts", ts);

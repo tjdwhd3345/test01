@@ -6,7 +6,7 @@ public class Room {
     private String name;
     private int beds;
     private int price;
-    
+    private String img;
     
     
     
@@ -23,6 +23,12 @@ public class Room {
     }
     
     
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     public int getNo() {
         return no;
     }

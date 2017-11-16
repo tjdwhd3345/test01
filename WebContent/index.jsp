@@ -27,7 +27,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://kylemitofsky.com/libraries/libraries/datepicker.css">
 <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css">
 <script>
 $(function(){ //jQuery
 	var $liArr = $("nav>div>div>ul>li");
@@ -175,14 +174,22 @@ input {
       </div>
     </nav>
     
+    <style type="text/css"> 
+     .carousel-caption {
+                 /*opacity : 0.6;*/
+                 background:rgba(52,58,64,0.7);
+                 /*background:rgba(100,100,100,0.6);*/
+                 filter: alpha(opacity=60);
+                 -moz-opacity:0.6;
+                 -khtml-opacity: 0.6;
+                }
+	</style>
+
      <header>
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
 				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('hotel03_copy.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<form action="list.do" method="post" class="hosearch">
+				<div class="carousel-item active" style="background-image: url('gaikan.jpg'); position:relative;" >
+					<div class="carousel-caption d-none d-md-block" style="text-align:center; position:absolute; top:250px; left:0px;width:100%; height:100px;">
+						<form action="list.do" method="post" class="hosearch" style="display:inline-block;">
 							<!-- check-in -->
 							<div class="form-group" style="float: left">
 								<input name="checkIn" id="checkIn" onchange="javascript:ci()" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-In">
@@ -193,7 +200,7 @@ input {
 								<input name="checkOut" id="checkOut" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-Out">
 							</div>
 							
-							<select name="search" id="search">
+							<select name="search" id="search" class="form-control clickable input-md" style="display:inline; width:100px">
 								<option value="loc">지역</option>
 								<option value="name">이름</option>
 							</select>
@@ -201,18 +208,17 @@ input {
 							<input type="hidden" id="nights" name="nights"> 
 							<input type="button" value="검색" id="test">
 						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+					</div><!-- carousel-caption d-none d-md-block 끝 여기안에 달력, 검색 -->
+				</div><!-- carousel-item active 끝 배경이미지 -->
 	</header>
-
-	<!-- Page Content -->
+	<!-- 
+	Page Content 
     <section class="py-5">
         <div class="container">
         
         </div>
-    </section>
+    </section> 
+    -->
         <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

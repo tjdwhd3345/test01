@@ -266,21 +266,28 @@
 	</div>
 	<div id="target" class="container">
 	<p><strong>객실정보</strong></p>
-	 <c:forEach var="room" items="${requestScope.ro}">
-	 	<div class="room_div" id="${room.no}" style="border:1px solid;">
-	 		${room.name }
-	 		<div class="room_detail" style="display:none;">
+	<c:if test="${empty requestScope.ro }"><p> 선택한 날짜에 이용가능한 객실이 없습니다.</p></c:if>
+	 	
+	<c:forEach var="room" items="${requestScope.ro}">
+		<div class="room_div" id="${room.no}" style="border:1px solid;">
+			${room.name }
+	 		<div class="room_detail" style="display:none; margin:20px;">
 	 			<form id="roomForm" action="reserveForm.jsp" method="post">
 		 			<input type="hidden" name="hotelnum" value="${param['num'] }">
 		 			<input type="hidden" name="hotelname" value="${param['name'] }">
 		 			<input type="hidden" name="hoteladdr" value="${param['addr'] }">
 		 			<input type="hidden" name="roomnum" value="${room.no }">
-		 			<table class="table table-striped table-hover ">
+		 			<table class="" width="100%" text-align="center" vertical-align="middle">
 		 				<tr align="center">
 		 					<th colspan="2">객실 정보</th><th>최대 인원</th><th colspan="2">가격</th>
 		 				</tr>
-		 				<tr align="center">
-		 					<td><img name="roomimg" src="">여긴사진</td>
+		 				<tr align="center" text-align="center">
+		 					<c:forEach var="roomimg" items="${requestScope.roomimg }">
+			 					<c:if test="${roomimg.no eq room.no}">
+				 					<td><img name="roomimg" src="${roomimg.img }" width="200px" height="200px"></td>
+				 					<input type="hidden" name="roomimg" value="${roomimg.img }">
+			 					</c:if>
+		 					</c:forEach>
 		 					<td><input readonly type="text" name="roomname" value="${room.name}"></td>
 		 					<td><input readonly type="text" name="roombeds" value="${room.beds}"></td>
 		 					<td align="right"><input readonly type="text" name="roomprice" value="${room.price}"></td>
@@ -292,6 +299,13 @@
 	 		</div>
 	 	</div>
 	 </c:forEach>
+	 <script>
+	 $("div.room_div").hover(function(){
+		    $(this).css("background-color", "#e8e8e8");
+		    }, function(){
+		    $(this).css("background-color", "white");
+		});
+	 </script>
 	<style>
 		input[type=text]{border:none}
 		.room_div{cursor:pointer}
@@ -304,6 +318,7 @@
 		$($btn).click(function(){
 			<c:choose>
 				<c:when test="${empty sessionScope.loginInfo }">
+					alert("로그인이 필요합니다");
 					location.href="EJLogin.jsp";
 				</c:when>
 				<c:otherwise>
@@ -351,8 +366,20 @@
 	 });
 	 </script>
 	</div>
+	
+	<style>
+	.tail {
+	   height: 50px;
+	}
+	footer{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	}
+	</style>
+	<div id="tail"></div>
 	<div id="target" class="container">
-		<p>호텔정보(제공 서비스)가 div로 쭉 나왔음ㄴ 좋겠어 아니면 테이블이나</p>
 		<caption><b>이용가능 서비스</b></caption>
 		<style>
 		#mytable{
@@ -377,7 +404,7 @@
 			</tr>
 			</c:forEach>
 		</table>
-		
+		<!-- 
 		<c:forEach var="ts" items="${requestScope.ts}">
 		<div id="${ts.name }" style="display:block;">
 			${ts.name } |
@@ -392,8 +419,9 @@
 			</c:forEach>
 		</div>
 		</c:forEach> 		
+		 -->
 	</div>
-	
+	<!-- 
 	<div id="target" class="container">
 	    <table class="table table-striped table-hover ">
 		  <thead>
@@ -415,6 +443,7 @@
 		</table> 
 		
 	</div>
+	 -->
 	<div id="target" class="container">
 	<p><b>이용후기</b>이용후기가 들어갈 div위치</p>
 	

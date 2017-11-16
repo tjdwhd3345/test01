@@ -48,9 +48,32 @@ public class RoomDAO {
             MyConnection.close(pstmt, con, rs);
         }
         
+        return list;
+    }
+    public List<Room> getImg(String hotelno) {
+        List<Room> list=new ArrayList<Room>();
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
         
+        String selectSQL="select * from room_imgs where hotel_no=?";
+        try {
+            con=MyConnection.getConnection();
+            pstmt=con.prepareStatement(selectSQL);
+            pstmt.setInt(1, Integer.parseInt(hotelno));
+            rs=pstmt.executeQuery();
+            while(rs.next()) {
+                Room r=new Room();
+                r.setNo(rs.getInt("room_no"));
+                r.setImg(rs.getString("img"));
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MyConnection.close(pstmt, con, rs);
+        }
         
         return list;
     }
-    
 }

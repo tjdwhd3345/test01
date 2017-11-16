@@ -140,10 +140,10 @@
 		<h1>reserveForm.jsp</h1>
 		<H3><strong>예약정보</strong></H3>
 		<div>
-			<div style="display:inline-block">
-				<img src="">방사진
+			<div style="display:inline-block; width:30%; margin:0px auto; vertical-align:middle;">
+				<img src="${param['roomimg'] }" width="200px" height="200px">
 			</div>
-			<DIV style="display:inline-block">
+			<DIV style="display:inline-block; position:relative; width:50%; margin:0px auto; vertical-align:middle;">
 				<table class="table">
 					<tr>
 						<td colspan="2" font-size="2rem"><b>${param.hotelname }</b></td>

@@ -1,5 +1,7 @@
 package com.my.vo;
 
+import java.util.Date;
+
 public class Reserve {
     private int bookno;
     private String bookemail;
@@ -10,7 +12,7 @@ public class Reserve {
     private String checkOut;
     private int price;
     private String hotelname;
-    
+    private Date reservedate;
     
     public Reserve() {
         
@@ -36,6 +38,12 @@ public class Reserve {
     }
     
     
+    public Date getReservedate() {
+        return reservedate;
+    }
+    public void setReservedate(Date reservedate) {
+        this.reservedate = reservedate;
+    }
     public String getHotelname() {
         return hotelname;
     }

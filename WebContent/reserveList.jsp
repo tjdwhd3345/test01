@@ -140,21 +140,50 @@
 	<div id="target" class="container">
 		<h1>reserveList.jsp</h1>
 		<c:set var="rList" value="${requestScope.reserveList }"/>
+		<h3>예약목록</h3>
+		<table width="100%">
+			<tr align="center">
+				<th>예약번호</th><th>호텔명</th><th>체크인</th><th>체크아웃</th><th>예약일시</th>
+			</tr>
 		<c:choose>
 			<c:when test="${empty rList}">
-				예약내역이 없음
+			<tr align="center">
+				<td colspan="5">예약내역이 없습니다.</td>
+			</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="reserve" items="${rList }">
-					예약번호 ${reserve.bookno }<br>
-					호텔이름 ${reserve.hotelname }<br>
-					호텔번호${reserve.hotelno }<br>
-					체크인 ${reserve.checkIn }<br>
-					체크아웃 ${reserve.checkOut }<br>
-					<hr>
+					<tr align="center"> 
+						<td>${reserve.bookno }</td>
+						<td>${reserve.hotelname }</td>
+						<td>${reserve.checkIn }</td>
+						<td>${reserve.checkOut }</td>
+						<td>${reserve.reservedate }</td>
+					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		</table>
 	</div>
+	<style>
+		th{height:60px;}
+		td{height:100px;
+		border-top: 1px solid;
+		border-bottom:1px solid;}
+	</style>
+	<style>
+	.tail {
+	   height: 50px;
+	}
+	</style>
+	<div class="tail"></div>
+	<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <!-- Footer end -->
 </body>
 </html>

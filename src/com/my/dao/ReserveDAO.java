@@ -22,7 +22,7 @@ public class ReserveDAO {
         int insertId=0;
         Reserve re=new Reserve();
         
-        String insertSQL="insert into book (book_email, book_name, book_hotel, book_room, check_in, check_out, book_price) values(?,?,?,?,?,?,?)";
+        String insertSQL="insert into book (book_email, book_name, book_hotel, book_room, check_in, check_out, book_price, reserve_date) values(?,?,?,?,?,?,?, now())";
         String lastSQL="select last_insert_id()";
         String selectSQL="select book.no, hotel.name, book.book_price, check_in, check_out from book " + 
                 "join hotel " + 
@@ -78,7 +78,7 @@ public class ReserveDAO {
     	
     	List<Reserve> rList=new ArrayList<Reserve>();
     	
-    	String selectSQL="select book.no, hotel.no, hotel.name, check_in, check_out from book" + 
+    	String selectSQL="select book.no, hotel.no, hotel.name, check_in, check_out, reserve_date from book" + 
     			" join hotel" + 
     			" on book.book_hotel = hotel.no" + 
     			" where book.book_email = ?" + 
@@ -96,6 +96,7 @@ public class ReserveDAO {
 				r.setHotelno(rs.getInt("hotel.no"));	//예약 호텔 번호
 				r.setCheckIn(rs.getString("check_in"));	//체크인 날짜
 				r.setCheckOut(rs.getString("check_out"));	//체크아웃 날짜
+				r.setReservedate(rs.getDate("reserve_date"));
 				rList.add(r);
 			}
 			/*if(rList == null) {
