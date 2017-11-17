@@ -258,7 +258,6 @@
 	    		<div>
 	    		<h1>${requestScope.ho.score } / 5.0</h1>
 	    		<div id="map" style="width:500px;height:400px;"></div>
-	    		
 	    		</div>
 	    	</td>
 	    </tr>
@@ -368,11 +367,10 @@
 	</div>
 	
 	<style>
-	.tail {
+	#tail {
 	   height: 50px;
 	}
 	</style>
-	<div id="tail"></div>
 	<div id="tail"></div>
 	<div id="target" class="container">
 		<caption><b>이용가능 서비스</b></caption>
@@ -439,27 +437,33 @@
 		
 	</div>
 	 -->
+	 <div id="tail"></div>
 	<div id="target" class="container">
 	<p><b>이용후기</b>이용후기가 들어갈 div위치</p>
 		<div>
 			
 		</div>
 		<div>
-			<table width="100%" text-align="center">
+			<table width="100%" text-align="center" border="1">
 				<tr>
 					<th width="20%"><label>이용자이름</label> <br><label>이메일</label></th>
 					<th width="20%">이용평점</th>
 					<th>후기 내용</th>
+					<th>작성일</th>
 				</tr>
+				<c:forEach var="review" items="${requestScope.rvList }">
 				<tr >
-					<td><label>이용자1</label><br><label>email@email.com</label></td>
-					<td>4.3</td>
-					<td>깨끗하고 좋아용</td>
+					<td><label>${review.reviewname }</label><br><label>${review.reviewemail }</label><br>${review.roomname }</td>
+					<td>${review.score }</td>
+					<td>${review.content }</td>
+					<td>${review.reviewdate }</td>
 				</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
-	
+	<div id="tail"></div>
+	<div id="tail"></div>
 	<!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

@@ -143,7 +143,7 @@
 		<h3>예약목록</h3>
 		<table width="100%">
 			<tr align="center">
-				<th>예약번호</th><th>호텔명</th><th>체크인</th><th>체크아웃</th><th>예약일시</th>
+				<th>예약번호</th><th>호텔명</th><th>체크인</th><th>체크아웃</th><th>예약일시</th><th>예약상태</th>
 			</tr>
 		<c:choose>
 			<c:when test="${empty rList}">
@@ -154,17 +154,31 @@
 			<c:otherwise>
 				<c:forEach var="reserve" items="${rList }">
 					<tr align="center"> 
-						<td>${reserve.bookno }</td>
+						<td id="bookno">${reserve.bookno }</td>
 						<td>${reserve.hotelname }</td>
 						<td>${reserve.checkIn }</td>
 						<td>${reserve.checkOut }</td>
 						<td>${reserve.reservedate }</td>
+						<td>${reserve.string_status }
+						<c:if test="${reserve.status eq 3 }">	<!-- 3이면 이용완료 -->
+						<br><input type="button" name="reviewbtn" value="후기작성">
+						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		</table>
 	</div>
+	<script>
+		$(function(){
+			$("input[name=reviewbtn]").click(function(){
+				var bookno=$(this).parent().prevAll("td#bookno");	//버튼누르면 예약번호를 받아온다.
+				//alert(bookno.text());
+				location.href="reviewForm.do?bookno="+bookno.text();
+			});
+		});
+	</script>
 	<style>
 		th{height:60px;}
 		td{height:100px;

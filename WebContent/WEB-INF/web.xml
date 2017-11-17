@@ -79,4 +79,24 @@
     <servlet-name>ReservelistServlet</servlet-name>
     <url-pattern>/reserveList.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReviewFormServlet</display-name>
+    <servlet-name>ReviewFormServlet</servlet-name>
+    <servlet-class>control.ReviewFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewFormServlet</servlet-name>
+    <url-pattern>/reviewForm.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReviewServlet</display-name>
+    <servlet-name>ReviewServlet</servlet-name>
+    <servlet-class>control.ReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewServlet</servlet-name>
+    <url-pattern>/review.do</url-pattern>
+  </servlet-mapping>
 </web-app>

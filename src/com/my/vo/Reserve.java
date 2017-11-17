@@ -13,6 +13,8 @@ public class Reserve {
     private int price;
     private String hotelname;
     private Date reservedate;
+    private int status;
+    private String string_status;
     
     public Reserve() {
         
@@ -38,6 +40,18 @@ public class Reserve {
     }
     
     
+    public String getString_status() {
+        return string_status;
+    }
+    public void setString_status(String string_status) {
+        this.string_status = string_status;
+    }
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
+    }
     public Date getReservedate() {
         return reservedate;
     }

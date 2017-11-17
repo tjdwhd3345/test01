@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.my.dao.HotelDAO;
 import com.my.dao.HotelServiceDAO;
+import com.my.dao.ReviewDAO;
 import com.my.dao.RoomDAO;
 import com.my.dao.TotalServiceDAO;
 import com.my.vo.Hotel;
 import com.my.vo.HotelService;
+import com.my.vo.Review;
 import com.my.vo.Room;
 import com.my.vo.TotalService;
 
@@ -27,6 +29,7 @@ public class HotelDetailServlet extends HttpServlet {
 	RoomDAO rDAO=new RoomDAO();
 	HotelServiceDAO hsDAO=new HotelServiceDAO();
 	TotalServiceDAO tsDAO=new TotalServiceDAO();
+	ReviewDAO rvDAO=new ReviewDAO();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("utf-8");
@@ -55,6 +58,10 @@ public class HotelDetailServlet extends HttpServlet {
 	    //모든 제공서비스를 객체로 받아온다.
 	    List<TotalService> ts=tsDAO.selectAllService();
 	    request.setAttribute("ts", ts);
+	    
+	    //해당 호텔의 이용후기들을 받아온다.
+	    List<Review> rvList=rvDAO.selectAllReview(num);
+	    request.setAttribute("rvList", rvList);
 	    
 	    RequestDispatcher rd=request.getRequestDispatcher("detail.jsp");
 	    rd.forward(request, response);

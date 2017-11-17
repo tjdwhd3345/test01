@@ -23,14 +23,14 @@ public class ReserveDAO {
         int insertId=0;
         Reserve re=new Reserve();
         
-        String insertSQL="insert into book (book_email, book_name, book_hotel, book_room, check_in, check_out, book_price, reserve_date) values(?,?,?,?,?,?,?, now())";
-        String lastSQL="select last_insert_id()";
-        String selectSQL="select book.no, hotel.name, book.book_price, check_in, check_out from book " + 
-                "join hotel " + 
-                "on book.book_hotel = hotel.no " + 
-                "join rooms " + 
-                "on book.book_room = rooms.no " + 
-                "where book.no=?";
+        String insertSQL="INSERT INTO book (book_email, book_name, book_hotel, book_room, check_in, check_out, book_price, reserve_date, status) VALUES(?,?,?,?,?,?,?, now(), 2)";
+        String lastSQL="SELECT last_insert_id()";
+        String selectSQL="SELECT book.no, hotel.name, book.book_price, check_in, check_out FROM book " + 
+                "JOIN hotel " + 
+                "ON book.book_hotel = hotel.no " + 
+                "JOIN rooms " + 
+                "ON book.book_room = rooms.no " + 
+                "WHERE book.no=?";
         try {
             con=MyConnection.getConnection();
             con.setAutoCommit(false);   //자동커밋 해제
@@ -82,11 +82,13 @@ public class ReserveDAO {
     	
     	List<Reserve> rList=new ArrayList<Reserve>();
     	
-    	String selectSQL="select book.no, hotel.no, hotel.name, check_in, check_out, reserve_date from book" + 
-    			" join hotel" + 
-    			" on book.book_hotel = hotel.no" + 
-    			" where book.book_email = ?" + 
-    			" order by check_in";
+    	String selectSQL="SELECT book.no, hotel.no, hotel.name, check_in, check_out, reserve_date, book.status, book_status.status FROM book" + 
+    			" JOIN hotel" + 
+    			" ON book.book_hotel = hotel.no" + 
+    			" JOIN book_status" + 
+    			" ON book.status = book_status.num" +
+    			" WHERE book.book_email = ?" + 
+    			" ORDER BY check_in";
     	
     	try {
 			con=MyConnection.getConnection();
@@ -101,6 +103,8 @@ public class ReserveDAO {
 				r.setCheckIn(rs.getString("check_in"));	//체크인 날짜
 				r.setCheckOut(rs.getString("check_out"));	//체크아웃 날짜
 				r.setReservedate(rs.getDate("reserve_date"));
+				r.setStatus(rs.getInt("book.status"));
+				r.setString_status(rs.getString("book_status.status")); //예약상태
 				rList.add(r);
 			}
 			/*if(rList == null) {
@@ -120,5 +124,33 @@ public class ReserveDAO {
     	 * 이걸 내가 임의로 catch할 수 있지 않을까??
     	 */
     	return rList;	
+    }
+    
+    //예약번호로 예약리턴
+    public Reserve getReserve(int bookno) {
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        
+        Reserve r=new Reserve();
+        
+        String selectSQL="SELECT b.book_name, r.name, b.book_hotel, b.book_room FROM rooms r " + 
+                "JOIN book b " + 
+                "ON b.book_room = r.no " + 
+                "WHERE b.no=?";
+        try {
+            con=MyConnection.getConnection();
+            pstmt=con.prepareStatement(selectSQL);
+            pstmt.setInt(1, bookno);
+            rs=pstmt.executeQuery();
+            rs.next();
+            r.setBookname(rs.getString("b.book_name")); //예약자이름
+            r.setHotelname(rs.getString("r.name")); //예약방이름, 임시방편..ㅎ    
+            r.setHotelno(rs.getInt("b.book_hotel"));    //예약호텔번호
+            r.setRoomno(rs.getInt("b.book_room"));  //예약방번호
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return r;
     }
 }
