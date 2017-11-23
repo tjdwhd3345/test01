@@ -103,7 +103,7 @@ public class HotelListServlet extends HttpServlet {
                         //System.out.println(bcrow.getName());    //bcrow=row
                         List<Element> bcrowcols=bcrow.getChildren();
                         HotelList h2=new HotelList();
-                        HotelDAO hDAO=new HotelDAO();
+                        
                         for(Element bcrowcol:bcrowcols) {
                             if(bcrowcol.getName().equals("rowNum")) {
                                 h2.setRowNum(bcrowcol.getText());
@@ -135,6 +135,10 @@ public class HotelListServlet extends HttpServlet {
                     }
                 }
             }
+            //각 호텔의 대표이미지, 평점, 최저가를 받아온다.
+            HotelDAO hDAO=new HotelDAO();
+            List<Hotel> hList3=hDAO.getImgScorePrice();
+            request.setAttribute("hList3", hList3);
             
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException");

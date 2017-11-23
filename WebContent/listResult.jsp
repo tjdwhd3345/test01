@@ -1,8 +1,5 @@
 <%@page import="com.my.vo.User"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page import="com.my.vo.HotelList"%>
-<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -231,7 +228,7 @@
       
       <!-- 상단고정 검색바 -->
       <div class="carousel-caption d-none d-md-block" style="text-align:center; left:0px;width:100%; height:80px;">
-        <form action="list.do" method="post" class="hosearch" style="display:inline-block;">
+        <form action="list.do" method="post" class="hosearch" style="display:inline-block; vertical-align:middle;">
         	<!-- check-in -->
 			<div class="form-group" style="float:left">
 				<input name="checkIn" id="checkIn" type="text" class="form-control clickable input-md" id="DtChkIn" placeholder="&#xf133;  Check-In" value="${sessionScope.checkIn }">
@@ -249,9 +246,9 @@
 				<option value="name" <c:if test="${searchcate eq 'name' }"> selected</c:if>>
 				이름</option>
 			</select>
-			<input type="text" id="searchValue" name="searchValue" style="width:400px" placeholder="지역 또는 호텔명을 입력해주세요" value="${param['searchValue']}">
+			<input type="text" id="searchValue" name="searchValue" style="height:38px; width:400px" placeholder="지역 또는 호텔명을 입력해주세요" value="${param['searchValue']}">
 			<input type="hidden" id="nights" name="nights">
-			<input type="button" value="검색" id="test">
+			<input type="button" value="검색" id="test" style="height:38px; text-align:center">
 		</form>
 		</div>
 		<!-- 상단고정 검색바 끝 -->
@@ -270,24 +267,29 @@
                  position:absolute;
                  top:50px;
                 }
+    .shadow{
+    	transition-property:box-shadow;
+    	transition-duration:0.2s;
+   		transition-timing-function:ease-in-out;
+    	transition-delay:initial;
+    }
+    .shadow:hover{
+    	box-shadow:10px 10px 5px #888888;
+    }
+    table{
+    	 border-collapse:seperate !important;
+    	 border-spacing:0px 20px;
+    }
+    .solid{border:1px solid #ddd;}
     </style>
     <div class="tail"></div>
     
     <div class="container" style="display:block;">
-		<table border="1" style="margin-bottom:50px; display:inline;">
-			<tr class="bg-dark" style="color:#FFFFFF" align="center">
-				<c:forEach var="values" items="${hList}">
-					<th>${values.rowNum}</th>
-					<th>${values.bplcNm}</th>
-					<th>${values.siteWhlAddr}</th>
-					<th>${values.rdnWhlAddr}</th>
-				</c:forEach>
-			</tr>
+		<table class="cell" style="margin-bottom:50px; text-align:center;">
 			<c:set var="seV" value="${param['searchValue']}"/>
 			<form action="detail.do" method="post" id="fd">
 			<c:forEach var="values" items="${hList2}">
-			<tr>
-				<!-- 검색 키워드가 장소인지 이름인지 -->
+				<%-- 검색 키워드가 장소인지 이름인지 --%>
 				<c:choose>
 					<c:when test="${searchcate eq 'loc'}">
 						<c:set var="site" value="${values.siteWhlAddr}"/>
@@ -296,19 +298,50 @@
 						<c:set var="site" value="${values.bplcNm}"/>
 					</c:when>
 				</c:choose>
-				<!-- 검색 키워드를 포함한 호텔만 출력 -->
+				<%-- 검색 키워드를 포함한 호텔만 출력 --%>
 				<c:if test="${fn:contains(site, seV)}">
-					<td>${values.rowNum}</td>
-					<td><a href="#" id="dd" 
-					onclick="window.open('detail.do?num=${values.rowNum}&name=${values.bplcNm}&x=${values.x}&y=${values.y}&addr=${values.siteWhlAddr}')">
-						${values.bplcNm}</a></td>
-					<td>${values.siteWhlAddr}</td>
-					<td>${values.rdnWhlAddr}</td>
-				</c:if>
+			<tr class="shadow" bgcolor="#F7F7F7"; style="border:1px solid #ddd; cursor:pointer;" onclick="window.open('detail.do?num=${values.rowNum}&name=${values.bplcNm}&x=${values.x}&y=${values.y}&addr=${values.siteWhlAddr}')">
+					<td class="solid" style="margin:0px; padding:0px;">
+						<c:forEach var="himg" items="${requestScope.hList3}">
+							<c:if test="${himg.no eq values.rowNum}">
+									<img src="${himg.img}" width="228px" height="228px">
+							</c:if>
+						</c:forEach>
+					</td>
+					<td class="solid" style="min-width:520px;">
+						<table align="center">
+						<tr>
+							<td>
+								${values.bplcNm}
+							</td>
+						</tr>
+							<tr><td>${values.siteWhlAddr}</td></tr>
+							<tr><td>${values.rdnWhlAddr}</td>
+						</tr>
+						</table>
+					</td>
+					<td class="solid" bgcolor="#FFFFFF" style="width:180px; min-width:180px;">
+						<c:forEach var="scopri" items="${requestScope.hList3}">
+							<c:choose>
+							<c:when test="${scopri.no eq values.rowNum}">
+								<span id="avgscore">${scopri.score}<span><br>
+								₩<span id="minprice"> ${scopri.price} </span>원
+							</c:when>
+							</c:choose>
+						</c:forEach>
+					</td>
 			</tr>
+				</c:if>
 			</c:forEach>
 			</form>
 		</table>
+		<style>
+		span#minprice{
+			color:#ee595d;
+			font-weight:bold;
+			font-size:20px;
+		}
+		</style>
 		<script>
 		/* function wo(){
 			

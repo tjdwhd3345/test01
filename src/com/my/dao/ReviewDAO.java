@@ -20,8 +20,8 @@ public class ReviewDAO {
         ResultSet rs=null;
         
         String insertSQL="INSERT INTO hotel_review "
-                + "(review_name, review_hotel, review_room, content, score, review_date) "
-                + "VALUES (?,?,?,?,?,now())";
+                + "(review_email, review_name, review_hotel, review_room, content, score, review_date) "
+                + "VALUES (?,?,?,?,?,?,now())";
         
         String updateSQL="UPDATE hotel SET score = "
                 + "(SELECT avg(score) AS avg FROM hotel_review WHERE review_hotel=?) "
@@ -31,11 +31,12 @@ public class ReviewDAO {
             con.setAutoCommit(false);
             
             pstmt=con.prepareStatement(insertSQL);
-            pstmt.setString(1, rv.getReviewname());  //리뷰작성자 이름
-            pstmt.setInt(2, rv.getHotelnum()); //리뷰호텔번호
-            pstmt.setInt(3, rv.getRoomnum()); //리뷰방번호
-            pstmt.setString(4, rv.getContent());  //리뷰내용
-            pstmt.setString(5, rv.getScore());    //리뷰평점
+            pstmt.setString(1, rv.getReviewemail());  //리뷰작성자 이름
+            pstmt.setString(2, rv.getReviewname());  //리뷰작성자 이름
+            pstmt.setInt(3, rv.getHotelnum()); //리뷰호텔번호
+            pstmt.setInt(4, rv.getRoomnum()); //리뷰방번호
+            pstmt.setString(5, rv.getContent());  //리뷰내용
+            pstmt.setString(6, rv.getScore());    //리뷰평점
             pstmt.executeUpdate();
             
             pstmt=con.prepareStatement(updateSQL);

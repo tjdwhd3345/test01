@@ -212,7 +212,9 @@
 		${param['x'] }
 		${param['y'] }
     <br><Br>
-		
+	<style>
+	table{border-collapse:collapse!important;}
+	</style>
 	<div id="target" class="container">
 	    <table class="table">
 			<tr>
@@ -264,11 +266,11 @@
 	    </table>
 	</div>
 	<div id="target" class="container">
-	<p><strong>객실정보</strong></p>
+	<h4><strong>객실정보</strong></h4>
 	<c:if test="${empty requestScope.ro }"><p> 선택한 날짜에 이용가능한 객실이 없습니다.</p></c:if>
 	 	
 	<c:forEach var="room" items="${requestScope.ro}">
-		<div class="room_div" id="${room.no}" style="border:1px solid;">
+		<div class="room_div" id="${room.no}" style="border:1px solid #ddd; height:100px;">
 			${room.name }
 	 		<div class="room_detail" style="display:none; margin:20px;">
 	 			<form id="roomForm" action="reserveForm.jsp" method="post">
@@ -373,7 +375,7 @@
 	</style>
 	<div id="tail"></div>
 	<div id="target" class="container">
-		<caption><b>이용가능 서비스</b></caption>
+		<h4><b>이용가능 서비스</b></h4>
 		<style>
 		#mytable{
 			width:100%;
@@ -439,28 +441,59 @@
 	 -->
 	 <div id="tail"></div>
 	<div id="target" class="container">
-	<p><b>이용후기</b>이용후기가 들어갈 div위치</p>
-		<div>
-			
+	<style>
+	div#reviewdiv{
+		box-sizing:border-box;
+	}
+	.review-left{
+		width:25%;
+		display:inline-block;
+		padding:40px 5px 20px 10px;
+		vertical-align:top;
+	}
+	.review-right{
+		width:70%;
+		display:inline-block;
+		padding:20px 10px 20px 5px;
+		vertical-align:top;
+	}
+	.review-score{
+		box-sizing:border-box;
+		font-size: 36px;
+	    font-weight: 600;
+	    color: #3d81f5;
+	    line-height: 36px;
+	    margin-bottom: 8px;
+	}
+	.review-bubble{
+		background-color:#f5f5f5;
+		border-radius:15px;
+		padding: 30px 60px 20px;
+	}
+	.review-tail{
+		padding-top:40px;
+	}
+	</style>
+	<h4><b>이용 후기</b></h4>
+		<c:forEach var="review" items="${requestScope.rvList }">
+		<div id="reviewdiv" style="border-top:1px solid #ddd;">
+			<div class="review-left">
+				<div class="review-score">${review.score }</div>
+				<div>${review.reviewname }</div>
+				<div>${review.roomname }</div>
+			</div>
+			<div class="review-right">
+				<div class="review-bubble">
+					<div class="review-body">
+						${review.content }
+					</div>
+					<div class="review-tail">
+						<span style="color:#999; line-height:40px;">작성일:${review.reviewdate }</span>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div>
-			<table width="100%" text-align="center" border="1">
-				<tr>
-					<th width="20%"><label>이용자이름</label> <br><label>이메일</label></th>
-					<th width="20%">이용평점</th>
-					<th>후기 내용</th>
-					<th>작성일</th>
-				</tr>
-				<c:forEach var="review" items="${requestScope.rvList }">
-				<tr >
-					<td><label>${review.reviewname }</label><br><label>${review.reviewemail }</label><br>${review.roomname }</td>
-					<td>${review.score }</td>
-					<td>${review.content }</td>
-					<td>${review.reviewdate }</td>
-				</tr>
-				</c:forEach>
-			</table>
-		</div>
+		</c:forEach>
 	</div>
 	<div id="tail"></div>
 	<div id="tail"></div>

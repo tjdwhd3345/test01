@@ -119,6 +119,7 @@ input {
   font-weight: normal;
   text-decoration: inherit;
   border-radius: 0 !important;
+  height:38px;
 }
 
 .form-control {
@@ -190,7 +191,7 @@ input {
 				<!-- Slide One - Set the background image for this slide in the line below -->
 				<div class="carousel-item active" style="background-image: url('gaikan.jpg'); position:relative;" >
 					<div class="carousel-caption d-none d-md-block" style="text-align:center; position:absolute; top:250px; left:0px;width:100%; height:100px;">
-						<form action="list.do" method="post" class="hosearch" style="display:inline-block;">
+						<form action="list.do" method="post" class="hosearch" style="display:inline-block; align-content: center;">
 							<!-- check-in -->
 							<div class="form-group" style="float: left">
 								<input name="checkIn" id="checkIn" type="text" class="form-control clickable input-md" placeholder="&#xf133;  Check-In">
@@ -205,9 +206,9 @@ input {
 								<option value="loc">지역</option>
 								<option value="name">이름</option>
 							</select>
-							<input type="text" id="searchValue" name="searchValue" style="width:400px" placeholder="지역 또는 호텔명을 입력해주세요">
+							<input type="text" id="searchValue" name="searchValue" style="width:400px;" placeholder="지역 또는 호텔명을 입력해주세요">
 							<input type="hidden" id="nights" name="nights"> 
-							<input type="button" value="검색" id="test">
+							<input type="button" value="검색" id="test" style="height:38px; vertical-align:middle; padding: 6px;">
 						</form>
 					</div><!-- carousel-caption d-none d-md-block 끝 여기안에 달력, 검색 -->
 				</div><!-- carousel-item active 끝 배경이미지 -->

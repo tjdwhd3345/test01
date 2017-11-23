@@ -7,7 +7,7 @@ public class HotelList {
     private String rdnWhlAddr;
     private String x;
     private String y;
-    
+    private String img;
     
     public HotelList() {
         
@@ -27,6 +27,14 @@ public class HotelList {
         this.y = y;
     }
     
+    
+    
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     public String getX() {
         return x;
     }

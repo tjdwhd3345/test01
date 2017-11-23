@@ -6,26 +6,8 @@
       <bplcNm>사업장명</bplcNm>
       <siteWhlAddr>소재지전체주소</siteWhlAddr>
       <rdnWhlAddr>도로명전체주소</rdnWhlAddr>
-      <apvPermYmd>인허가일자</apvPermYmd>
-      <trdStateNm>영업상태명</trdStateNm>
-      <dcbYmd>폐업일자</dcbYmd>
-      <clgStdt>휴업시작일자</clgStdt>
-      <clgEnddt>휴업종료일자</clgEnddt>
-      <ropnYmd>재개업일자</ropnYmd>
-      <siteArea>소재지면적</siteArea>
-      <sitePostNo>소재지우편번호</sitePostNo>
-      <bdngOwnSeNm>건물소유구분명</bdngOwnSeNm>
-      <yy>년도</yy>
-      <multUsnUpsoYn>다중이용업소여부</multUsnUpsoYn>
-      <yangsilCnt>양실수</yangsilCnt>
-      <sntCobNm>위생업종명</sntCobNm>
-      <sntUptaeNm>위생업태명</sntUptaeNm>
-      <hanshilCnt>한실수</hanshilCnt>
-      <siteTel>전화번호</siteTel>
       <x>위치정보(X)</x>
       <y>위치정보(Y)</y>
-      <mgtNo>인허가번호</mgtNo>
-      <dtlStateNm>상세영업상태명</dtlStateNm>
     </columns>
     <paging>
       <pageIndex>1</pageIndex>
@@ -44,286 +26,88 @@
         <bplcNm>참피온</bplcNm>
         <siteWhlAddr>제주특별자치도 제주시 삼도일동 751-8번지 </siteWhlAddr>
         <rdnWhlAddr>제주특별자치도 제주시 남성로 131 (삼도일동)</rdnWhlAddr>
-        <apvPermYmd>20150622</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>1,286.41</siteArea>
-        <sitePostNo>690811</sitePostNo>
-        <bdngOwnSeNm></bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>35</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>064 7518801</siteTel>
         <x>155346.11303200000  </x>
         <y>1825.78699859000    </y>
-        <mgtNo>6510000-201-2015-00017</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>2</rowNum>
         <bplcNm>제주엠</bplcNm>
         <siteWhlAddr>제주특별자치도 제주시 애월읍 신엄리 2089-1번지 </siteWhlAddr>
         <rdnWhlAddr>제주특별자치도 제주시 애월읍 신상로 196</rdnWhlAddr>
-        <apvPermYmd>20150622</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>658.09</siteArea>
-        <sitePostNo>695912</sitePostNo>
-        <bdngOwnSeNm></bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>15</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt></hanshilCnt>
-        <siteTel>064 7990505</siteTel>
         <x>140916              </x>
         <y>-4469               </y>
-        <mgtNo>6510000-201-2015-00018</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>3</rowNum>
         <bplcNm>타임호텔</bplcNm>
         <siteWhlAddr>충청남도 천안시 서북구 성정동 1339번지 </siteWhlAddr>
         <rdnWhlAddr>충청남도 천안시 서북구 성정공원7길 14, 2~8층 (성정동)</rdnWhlAddr>
-        <apvPermYmd>20150616</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>2,894.58</siteArea>
-        <sitePostNo>331978</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>61</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>041 5231181</siteTel>
         <x>212668              </x>
         <y>369751              </y>
-        <mgtNo>5660000-201-2015-00002</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>4</rowNum>
         <bplcNm>아몬드호텔</bplcNm>
         <siteWhlAddr>부산광역시 동구 초량동 1203-3번지 </siteWhlAddr>
         <rdnWhlAddr>부산광역시 동구 중앙대로196번길 12-5 (초량동)</rdnWhlAddr>
-        <apvPermYmd>20150205</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>3,933.90</siteArea>
-        <sitePostNo>601839</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>77</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel></siteTel>
         <x>386043.41546900000  </x>
         <y>181623.08586700000  </y>
-        <mgtNo>3270000-201-2015-00001</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>5</rowNum>
         <bplcNm>비젼호텔</bplcNm>
         <siteWhlAddr>서울특별시 성동구 도선동 12-1번지 </siteWhlAddr>
         <rdnWhlAddr>서울특별시 성동구 고산자로 277 (도선동)</rdnWhlAddr>
-        <apvPermYmd>19890218</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>2,499.06</siteArea>
-        <sitePostNo>133882</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>1989</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>64</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt></hanshilCnt>
-        <siteTel>0222962245</siteTel>
         <x>203173.28777000000  </x>
         <y>451658.49425300000  </y>
-        <mgtNo>3030000-201-1989-00191</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>6</rowNum>
         <bplcNm>하이눈호텔</bplcNm>
         <siteWhlAddr>서울특별시 성동구 성수동1가 671-186번지 </siteWhlAddr>
         <rdnWhlAddr>서울특별시 성동구 서울숲9길 9 (성수동1가)</rdnWhlAddr>
-        <apvPermYmd>20000509</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>782.00</siteArea>
-        <sitePostNo>133825</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>2000</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>28</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>02 4621356</siteTel>
         <x>203837.47151800000  </x>
         <y>449926.75496900000  </y>
-        <mgtNo>3030000-201-2000-00211</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>7</rowNum>
         <bplcNm>아이체크현진호텔</bplcNm>
         <siteWhlAddr>강원도 동해시 천곡동 839번지 </siteWhlAddr>
         <rdnWhlAddr>강원도 동해시 한섬로 133-9 (천곡동)</rdnWhlAddr>
-        <apvPermYmd>20030724</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>2,455.91</siteArea>
-        <sitePostNo>240812</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>2003</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>57</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>2</hanshilCnt>
-        <siteTel>033 5336464</siteTel>
         <x>387198.01198500000  </x>
         <y>449149.03342700000  </y>
-        <mgtNo>4210000-201-2003-00005</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>8</rowNum>
         <bplcNm>글로리 인(Glory Inn)</bplcNm>
         <siteWhlAddr>서울특별시 중구 오장동 139-18번지 </siteWhlAddr>
         <rdnWhlAddr>서울특별시 중구 동호로 343-1 (오장동)</rdnWhlAddr>
-        <apvPermYmd>20150917</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>881.23</siteArea>
-        <sitePostNo>100310</sitePostNo>
-        <bdngOwnSeNm>자가</bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>42</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>0222856903</siteTel>
         <x>200182.79248400000  </x>
         <y>451728.22221600000  </y>
-        <mgtNo>3010000-201-2015-00031</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>9</rowNum>
         <bplcNm>베스트웨스턴 해운대호텔</bplcNm>
         <siteWhlAddr>부산광역시 해운대구 중동 1391-42번지 </siteWhlAddr>
         <rdnWhlAddr>부산광역시 해운대구 구남로 42, 2층일부,3~15층 (중동)</rdnWhlAddr>
-        <apvPermYmd>20150917</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>5,572.90</siteArea>
-        <sitePostNo>612847</sitePostNo>
-        <bdngOwnSeNm></bdngOwnSeNm>
-        <yy>2015</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>134</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>051 664 1234</siteTel>
         <x>396916.29770900000  </x>
         <y>187034.21330800000  </y>
-        <mgtNo>3330000-201-2015-00009</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>10</rowNum>
         <bplcNm>명동치즈호텔</bplcNm>
         <siteWhlAddr>서울특별시 중구 충무로4가 148-1번지 9층 </siteWhlAddr>
         <rdnWhlAddr>서울특별시 중구 퇴계로37길 14, 9층 (충무로4가)</rdnWhlAddr>
-        <apvPermYmd>20160201</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>394.32</siteArea>
-        <sitePostNo>100862</sitePostNo>
-        <bdngOwnSeNm>임대</bdngOwnSeNm>
-        <yy>2016</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>15</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>0222660606</siteTel>
         <x>199470.04264900000  </x>
         <y>451378.05900400000  </y>
-        <mgtNo>3010000-201-2016-00004</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>11</rowNum>
         <bplcNm>로드하우스 명동</bplcNm>
         <siteWhlAddr>서울특별시 중구 충무로4가 148-1번지 10층 </siteWhlAddr>
         <rdnWhlAddr>서울특별시 중구 퇴계로37길 14, 10층 (충무로4가)</rdnWhlAddr>
-        <apvPermYmd>20160201</apvPermYmd>
-        <trdStateNm>운영중</trdStateNm>
-        <dcbYmd></dcbYmd>
-        <clgStdt></clgStdt>
-        <clgEnddt></clgEnddt>
-        <ropnYmd></ropnYmd>
-        <siteArea>349.92</siteArea>
-        <sitePostNo>100862</sitePostNo>
-        <bdngOwnSeNm>임대</bdngOwnSeNm>
-        <yy>2016</yy>
-        <multUsnUpsoYn>N</multUsnUpsoYn>
-        <yangsilCnt>13</yangsilCnt>
-        <sntCobNm>숙박업(일반)</sntCobNm>
-        <sntUptaeNm>일반호텔</sntUptaeNm>
-        <hanshilCnt>0</hanshilCnt>
-        <siteTel>0222736868</siteTel>
         <x>199470.04264900000  </x>
         <y>451378.05900400000  </y>
-        <mgtNo>3010000-201-2016-00005</mgtNo>
-        <dtlStateNm>영업</dtlStateNm>
       </row>
       <row>
         <rowNum>12</rowNum>
@@ -14769,7 +14553,7 @@
         <siteArea>3,810.24</siteArea>
         <sitePostNo></sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -14795,7 +14579,7 @@
         <siteArea>1,364.00</siteArea>
         <sitePostNo></sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -14925,7 +14709,7 @@
         <siteArea>1,496.99</siteArea>
         <sitePostNo>110320</sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -21191,7 +20975,7 @@
         <siteArea>2,173.00</siteArea>
         <sitePostNo></sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -21321,7 +21105,7 @@
         <siteArea>1,728.05</siteArea>
         <sitePostNo></sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -28575,7 +28359,7 @@
         <siteArea>2,171.86</siteArea>
         <sitePostNo></sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -33801,7 +33585,7 @@
         <siteArea>17,112.06</siteArea>
         <sitePostNo>690801</sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -33827,7 +33611,7 @@
         <siteArea>1,160.73</siteArea>
         <sitePostNo>695932</sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>
@@ -34009,7 +33793,7 @@
         <siteArea>2,136.10</siteArea>
         <sitePostNo>356873</sitePostNo>
         <bdngOwnSeNm></bdngOwnSeNm>
-        <yy></yy>
+        
         <multUsnUpsoYn></multUsnUpsoYn>
         <yangsilCnt></yangsilCnt>
         <sntCobNm></sntCobNm>

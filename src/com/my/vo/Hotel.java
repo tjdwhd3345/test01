@@ -6,16 +6,17 @@ public class Hotel {
     private int no;
     private String name;
     private String location;
-    private float score;
+    private String score;
     private String info;
     private String service;
-    private List<String> img;
-    
+    private String img;
+    private List<String> imgs;
+    private String price;
     
     public Hotel() {
         
     }
-    public Hotel(int no, String name, String location, float score) {
+    public Hotel(int no, String name, String location, String score) {
         this.no = no;
         this.name = name;
         this.location = location;
@@ -25,27 +26,29 @@ public class Hotel {
         this.no = no;
         this.name = name;
         this.location = location;
-        this.score = 0;
+        this.score = "";
         this.info = info;
         this.service = service;
     }
-    public Hotel(int no, String name, String location, String info) {
-        this.no = no;
-        this.name = name;
-        this.location = location;
-        this.score=0;
-        this.info=info;
-    }
-    public Hotel(int no, String name, String location, float score, String info) {
-        this(no, name, location, info);
-        this.score = score;
-    }
     
-    public List<String> getImg() {
+    
+    public String getPrice() {
+        return price;
+    }
+    public void setPrice(String price) {
+        this.price = price;
+    }
+    public String getImg() {
         return img;
     }
-    public void setImg(List<String> img) {
+    public void setImg(String img) {
         this.img = img;
+    }
+    public List<String> getImgs() {
+        return imgs;
+    }
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
     }
     public String getService() {
         return service;
@@ -77,10 +80,10 @@ public class Hotel {
     public void setLocation(String location) {
         this.location = location;
     }
-    public float getScore() {
+    public String getScore() {
         return score;
     }
-    public void setScore(float score) {
+    public void setScore(String score) {
         this.score = score;
     }
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.my.sql.MyConnection;
 import com.my.vo.Hotel;
@@ -27,7 +29,7 @@ public class HotelDAO {
             pstmt=con.prepareStatement(insertSQL);
             pstmt.setString(1, hotel.getName());
             pstmt.setString(2, hotel.getLocation());
-            pstmt.setFloat(3, hotel.getScore());
+            pstmt.setString(3, hotel.getScore());
             pstmt.executeUpdate();
             
             /*
@@ -70,7 +72,7 @@ public class HotelDAO {
             pstmt.setString(1, hotelno);
             rs=pstmt.executeQuery();
             if(rs.next()) {
-                h.setScore(rs.getFloat("score"));
+                h.setScore(rs.getString("score"));
             }
             
         } catch (SQLException e) {
@@ -81,5 +83,32 @@ public class HotelDAO {
         
         
         return h;
+    }
+    public List<Hotel> getImgScorePrice() {
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        List<Hotel> himg=new ArrayList<Hotel>();
+        
+        String selectSQL="SELECT h.no, h.score, hi.img, (SELECT IFNULL(min(price), 0) FROM rooms r WHERE r.hotel_no = h.no) as price " + 
+                "FROM hotel h " + 
+                "LEFT OUTER JOIN hotel_imgs hi " + 
+                "ON h.no = hi.hotel_no";
+        try {
+            con=MyConnection.getConnection();
+            pstmt=con.prepareStatement(selectSQL);
+            rs=pstmt.executeQuery();
+            while(rs.next()) {
+                Hotel h=new Hotel();
+                h.setNo(rs.getInt("h.no"));
+                h.setScore(rs.getString("h.score"));
+                h.setImg(rs.getString("hi.img"));
+                h.setPrice(rs.getString("price"));
+                himg.add(h);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return himg;
     }
 }

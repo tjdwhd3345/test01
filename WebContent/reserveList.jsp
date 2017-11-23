@@ -136,7 +136,30 @@
       </div>
     </nav>
 	<!-- Navigation end -->
+	<style>
+	table{border-collapse:collapse!important}
+	button{color:inherit;font:inherit;margin:0;
+	overflow:visible;
+	text-transform:none;
+	-webkit-appearance:button;
+	cursor:pointer;
+	}
+	button[disabled]{cursor:default}
+	button::-moz-focus-inner{border:0;padding:0}
+	input[type=button]{
+	cursor:pointer;
+	}
 	
+	.btn{padding:8px 30px;background-color:#f0f0f0;border:1px solid #dadada;font-weight:300;font-size:.92em;color:#444;border-radius:2px}
+	.btn:active,.btn:focus{outline:0;text-decoration:none}
+	.btn.info{color:#fff;background-color:#4EC2E7;border:1px solid #3BB1D9}
+	.btn.info:hover{background-color:#3BB1D9}
+	.btn.line{background-color:transparent}
+	.btn.info.line{color:#4EC2E7}
+	.btn.info.line:hover{color:#fff}
+	.btn.rounded{border-radius:10px}
+	</style>
+
 	<div id="target" class="container">
 		<h1>reserveList.jsp</h1>
 		<c:set var="rList" value="${requestScope.reserveList }"/>
@@ -161,7 +184,7 @@
 						<td>${reserve.reservedate }</td>
 						<td>${reserve.string_status }
 						<c:if test="${reserve.status eq 3 }">	<!-- 3이면 이용완료 -->
-						<br><input type="button" name="reviewbtn" value="후기작성">
+						<br><input type="button" name="reviewbtn" class="btn info line rounded" value="후기작성">
 						</c:if>
 						</td>
 					</tr>

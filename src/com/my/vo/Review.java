@@ -15,7 +15,8 @@ public class Review {
     
     public Review() { }
     
-    public Review(String reviewname, int hotelnum, int roomnum, String content, String score) {
+    public Review(String reviewemail,String reviewname, int hotelnum, int roomnum, String content, String score) {
+        this.reviewemail = reviewemail;
         this.reviewname = reviewname;
         this.hotelnum = hotelnum;
         this.roomnum = roomnum;
