@@ -152,18 +152,24 @@
 	
 	.btn{padding:8px 30px;background-color:#f0f0f0;border:1px solid #dadada;font-weight:300;font-size:.92em;color:#444;border-radius:2px}
 	.btn:active,.btn:focus{outline:0;text-decoration:none}
-	.btn.info{color:#fff;background-color:#4EC2E7;border:1px solid #3BB1D9}
-	.btn.info:hover{background-color:#3BB1D9}
+	.btn.info{color:#fff;background-color:#325D88;border:1px solid #325D88}
+	.btn.info:hover{background-color:#325D88}
 	.btn.line{background-color:transparent}
-	.btn.info.line{color:#4EC2E7}
+	.btn.info.line{color:#325D88}
 	.btn.info.line:hover{color:#fff}
 	.btn.rounded{border-radius:10px}
+	
+	.head {
+	   height: 110px;
+	}
+	.tail {
+	   height: 293px;
+	}
 	</style>
-
 	<div id="target" class="container">
-		<h1>reserveList.jsp</h1>
+	<div class="head"></div>
 		<c:set var="rList" value="${requestScope.reserveList }"/>
-		<h3>예약목록</h3>
+		<h3>예약목록</h3><br>
 		<table width="100%">
 			<tr align="center">
 				<th>예약번호</th><th>호텔명</th><th>체크인</th><th>체크아웃</th><th>예약일시</th><th>예약상태</th>
@@ -205,13 +211,8 @@
 	<style>
 		th{height:60px;}
 		td{height:100px;
-		border-top: 1px solid;
-		border-bottom:1px solid;}
-	</style>
-	<style>
-	.tail {
-	   height: 50px;
-	}
+		border-top: 1px solid #ddd;
+		border-bottom:1px solid #ddd;}
 	</style>
 	<div class="tail"></div>
 	<!-- Footer -->

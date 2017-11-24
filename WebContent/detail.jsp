@@ -25,17 +25,20 @@
     <script src="BootTestCss/vendor/jquery/jquery.min.js"></script>
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
+    <!-- a tag focus JavaScript -->
+    <script src="BootTestCss/vendor/bootstrap/js/creative.min.js"></script>
+    
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>
 	<style>
 		nav>ul>li{display:inline-block}
 		
 	/* 메인 슬라이드 */
-	#rolling{width:660px;  margin:0px auto; position:relative; overflow:hidden;} 
+	#rolling{width:480px;  margin:0px auto; position:relative; overflow:hidden;} 
 	#rolling h1{display:none;}
 	#rolling div:first-of-type{width:3000px; position:relative;}
 	#rolling img{width:658px; height:500px;}
-	#circle{width:650px; text-align:center; margin:auto;}
+	#circle{width:480px; text-align:center; margin:auto;}
 	#circle i{display:inline-block; padding:5px; margin:auto 0px; border-radius:10px; cursor:pointer; font-weight: bold;}
 	</style>
 	<!-- bootstrap end -->
@@ -91,26 +94,11 @@
 			var count=0;
 			$("#circle>i").eq(0).css("background", "#E8F5FF");
 
-			/*자동롤링 start*/
-			setInterval(function(){
-				count++;
-				if($("#rolling>div:eq(0)").position().left == -1800){
-					$("#rolling>div:eq(0)").append('<img src="hotel01_.jpg" alt="롤링이미지">').animate({left:"-=660px"},
-							function(){
-								$("#rolling>div:eq(0)").css({"left" : 0});
-								$("#rolling>div:eq(0)>img").last().remove();
-							});
-					count=0;
-					$("#circle>i").eq(count).css("background", "#E8F5FF").siblings().css("background", "none");
-				}
-			},2000);
-
-			/* 자동롤링 end */
 			var change=0;
 			$("#circle>i").click(function(){
 				//alert($(this).index());
 				var me = $(this).index();
-				change = (me * (-660)) + "px";
+				change = (me * (-485)) + "px";
 				$("#rolling>div:eq(0)").animate({left:change});
 				$("#circle>i").eq(me).css("background", "#E8F5FF").siblings().css("background", "none");
 			});
@@ -221,16 +209,16 @@
 				<td colspan="2"><h1>${param['name']}</h1></td>
 			</tr>
 			<tr>
-				<td colspan="2">${param['addr']}</td>
+				<td colspan="2"><span style="color:#0283df;">${param['addr']}</span></td>
 			</tr>		
 	    <tr>
 	    	<td>
 	    		<div class="top_wrap">
 	    		<section id="rolling">
-	    			<div>
-			    		<img src="hotel01_.jpg" width="480px" height="300px">
-			    		<img src="hotel03_copy.jpg" width="480px" height="300px">
-			    		<img src="hotel04_.jpg" width="480px" height="300px">
+	    			<div style="box-sizing:border-box;">
+			    		<img src="hotel01_.jpg" style="width:480px; height:300px;">
+			    		<img src="hotel03_copy.jpg" style="width:480px; height:300px;">
+			    		<img src="hotel04_.jpg" style="width:480px; height:300px;">
 		    		</div>
 		    		<div id="circle">
 			    		<i><img src="hotel01_.jpg" style="width:100px; height:100px;"></i>
@@ -258,45 +246,68 @@
 	    	<td>
 	    	
 	    		<div>
-	    		<h1>${requestScope.ho.score } / 5.0</h1>
-	    		<div id="map" style="width:500px;height:400px;"></div>
+	    		<span style="color:#ffaf47;"><h1>${requestScope.ho.score } / 5.0</h1></span>
+	    		<a class="js-scroll-trigger" href="#review-head">다양한 이용후기를 확인해보세요!</a>
+	    		<div id="map" style="margin-top:60px; width:400px;height:267px;"></div>
 	    		</div>
 	    	</td>
 	    </tr>
 	    </table>
 	</div>
 	<div id="target" class="container">
-	<h4><strong>객실정보</strong></h4>
+	<style>
+	.room_div{
+		border:1px solid #ddd;
+		margin-bottom:20px;
+	}
+	.room-header{
+		display:block;
+		border:0px solid;
+		margin:20px;
+	}
+	.room_detail{border:0px solid; margin:20px;}
+	th,td{padding:15px;}
+	
+	button[disabled]{cursor:default}
+	button::-moz-focus-inner{border:0;padding:0}
+	input[type=button]{cursor:pointer;}
+	
+	.btn{padding:8px 30px;background-color:#325D88;border:1px solid #325D88;font-weight:300;font-size:.92em;color:#444;border-radius:2px}
+	.btn.info{color:#fff;background-color:#325D88;border:1px solid #325D88}
+	.btn.rounded{border-radius:10px}
+	</style>
+	<h4><strong>객실정보</strong><img src="glyphicons/bedroom-nightstand.png"></h4>
 	<c:if test="${empty requestScope.ro }"><p> 선택한 날짜에 이용가능한 객실이 없습니다.</p></c:if>
 	 	
 	<c:forEach var="room" items="${requestScope.ro}">
-		<div class="room_div" id="${room.no}" style="border:1px solid #ddd; height:100px;">
-			${room.name }
-	 		<div class="room_detail" style="display:none; margin:20px;">
+		<div class="room_div" id="${room.no}">
+			<div class="room-header"><h5><strong>${room.name }</strong></h5></div>
+	 		<div class="room_detail">
+	 			<div class="room-row">
 	 			<form id="roomForm" action="reserveForm.jsp" method="post">
 		 			<input type="hidden" name="hotelnum" value="${param['num'] }">
 		 			<input type="hidden" name="hotelname" value="${param['name'] }">
 		 			<input type="hidden" name="hoteladdr" value="${param['addr'] }">
 		 			<input type="hidden" name="roomnum" value="${room.no }">
-		 			<table class="" width="100%" text-align="center" vertical-align="middle">
+		 			<table class="" width="100%" text-align="center" vertical-align="middle" style="background-color: #f5f5f5; border:0px solid !important;">
 		 				<tr align="center">
-		 					<th colspan="2">객실 정보</th><th>최대 인원</th><th colspan="2">가격</th>
+		 					<th>객실/투숙 공간</th><th>최대 인원</th><th colspan="2">가격</th>
 		 				</tr>
 		 				<tr align="center" text-align="center">
 		 					<c:forEach var="roomimg" items="${requestScope.roomimg }">
 			 					<c:if test="${roomimg.no eq room.no}">
-				 					<td><img name="roomimg" src="${roomimg.img }" width="200px" height="200px"></td>
+				 					<td><img name="roomimg" src="${roomimg.img }" width="150px" height="150px"></td>
 				 					<input type="hidden" name="roomimg" value="${roomimg.img }">
 			 					</c:if>
 		 					</c:forEach>
-		 					<td><input readonly type="text" name="roomname" value="${room.name}"></td>
-		 					<td><input readonly type="text" name="roombeds" value="${room.beds}"></td>
-		 					<td align="right"><input readonly type="text" name="roomprice" value="${room.price}"></td>
-		 					<td><input type="button" value="예약"></td>
+		 					<td><input readonly type="text" name="roombeds" value="${room.beds}명" style="background-color: #f5f5f5;text-align:center;font-size: 18px;width: 150px;"></td>
+		 					<td align="right">₩<input readonly type="text" name="roomprice" align="right" value="${room.price}" style="text-align:right;background-color: #f5f5f5;font-size: 25px;width: 100px;color: #ed5c59;">원</td>
+		 					<td><input type="button" value="예약" class="btn info line rounded"></td>
 		 				</tr>
 		 			</table>	
 	 			
 	 			</form>
+	 			</div>
 	 		</div>
 	 	</div>
 	 </c:forEach>
@@ -309,7 +320,6 @@
 	 </script>
 	<style>
 		input[type=text]{border:none}
-		.room_div{cursor:pointer}
 	</style>
 	<script>
 	
@@ -331,6 +341,7 @@
 				</c:otherwise>
 			</c:choose>
 		});
+		/*
 		var $rDiv=$('.room_div'); 
 		$($rDiv).click(function(){
 			//alert($(this).attr('id'));
@@ -363,7 +374,6 @@
 				}
 			});
 			*/
-		});
 	 });
 	 </script>
 	</div>
@@ -382,15 +392,40 @@
 			max-width:100%;
 			
 		}
+		.hotel-service{box-sizing:border-box;}
+		.service-left, .service-right{display:inline-block;}
+		.total-service{padding:10px 20px 10px 20px; border-top:1px solid #ddd;}
 		</style>
-		<table id="mytable" class="table table-striped table-hover ">
+		<!-- 
+		<img src="glypicons/bar-1.png">
+		<img src="glypicons/bar-2.png">
+		<img src="glypicons/bed-1.png">
+		<img src="glypicons/bed-2.png">
+		<img src="glypicons/laundry.png">
+		<img src="glypicons/pool.png">
+		<img src="glypicons/room-service.png">
+		<img src="glypicons/front.png">
+		<img src="glypicons/spa.png"> 
+		-->
+		<table style="width:100%">
 			<c:forEach var="ts" items="${requestScope.ts}">
-			<tr>
-				<td width="20%">${ts.name }</td>
+			<tr style="border-top:1px solid #ddd;">
+				<td style="width:200px!important;">${ts.name }</td>
 				<c:forEach var="hs" items="${requestScope.hs}">
 				<c:choose>
 					<c:when test="${ts.name eq hs.name}">
-						<td width="40%">
+						<td width="200px" min-width="166px" max-width="250px">
+					 		<c:if test="${hs.service eq 'Wi-Fi'}">&nbsp;<img src="glypicons/wifi.png"></c:if>
+					 		<c:if test="${hs.service eq 'VoIP'}">&nbsp;<img src="glypicons/call-ip.png"></c:if>
+					 		<c:if test="${hs.service eq '수영장'}">&nbsp;<img src="glypicons/pool.png""></c:if>
+					 		<c:if test="${hs.service eq '사우나'}">&nbsp;<img src="glypicons/sauna.png""></c:if>
+					 		<c:if test="${hs.service eq '스파'}">&nbsp;<img src="glypicons/spa.png"></c:if>
+					 		<c:if test="${hs.service eq '룸서비스'}">&nbsp;<img src="glypicons/room-service.png"></c:if>
+					 		<c:if test="${hs.service eq '레스토랑'}">&nbsp;<img src="glypicons/dining-set.png"></c:if>
+					 		<c:if test="${hs.service eq '바'}">&nbsp;<img src="glypicons/bar-2.png"></c:if>
+					 		<c:if test="${hs.service eq '프론트 데스크'}">&nbsp;<img src="glypicons/front.png"></c:if>
+					 		<c:if test="${hs.service eq '미용실'}">&nbsp;<img src="glypicons/scissors.png"></c:if>
+					 		<c:if test="${hs.service eq '세탁 서비스'}">&nbsp;<img src="glypicons/laundry.png"></c:if>
 					 		${hs.service}
 					 	</td>
 					</c:when>
@@ -473,7 +508,13 @@
 	.review-tail{
 		padding-top:40px;
 	}
+	#review-head{
+		height:50px;
+		margin-bottom:10px;
+	}
 	</style>
+	
+	<div id="review-head"></div>
 	<h4><b>이용 후기</b></h4>
 		<c:forEach var="review" items="${requestScope.rvList }">
 		<div id="reviewdiv" style="border-top:1px solid #ddd;">

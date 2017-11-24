@@ -90,7 +90,7 @@ public class HotelDAO {
         ResultSet rs=null;
         List<Hotel> himg=new ArrayList<Hotel>();
         
-        String selectSQL="SELECT h.no, h.score, hi.img, (SELECT IFNULL(min(price), 0) FROM rooms r WHERE r.hotel_no = h.no) as price " + 
+        String selectSQL="SELECT h.no, h.score, hi.img, (SELECT IFNULL(FORMAT(min(price), 0),0) FROM rooms r WHERE r.hotel_no = h.no) as price " + 
                 "FROM hotel h " + 
                 "LEFT OUTER JOIN hotel_imgs hi " + 
                 "ON h.no = hi.hotel_no";

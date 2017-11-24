@@ -5,7 +5,7 @@ public class Room {
     private int hotel_no;
     private String name;
     private int beds;
-    private int price;
+    private String price;
     private String img;
     
     
@@ -13,7 +13,7 @@ public class Room {
     public Room() {
         
     }
-    public Room(int no, int hotel_no, String name, int beds, int price) {
+    public Room(int no, int hotel_no, String name, int beds, String price) {
         super();
         this.no = no;
         this.hotel_no = hotel_no;
@@ -53,10 +53,10 @@ public class Room {
     public void setBeds(int beds) {
         this.beds = beds;
     }
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
     

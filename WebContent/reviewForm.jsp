@@ -28,7 +28,6 @@
     
     <!-- rating -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="BootTestCss/vendor/bootstrap/css/rating.css" rel="stylesheet">
 	<link href="BootTestCss/vendor/bootstrap/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 	 
 	<!-- optionally if you need to use a theme, then include the theme file as mentioned below -->
@@ -47,6 +46,7 @@
 	<title></title>
 	<style>
 		nav>ul>li{display:inline-block}
+		
 	</style>
 	<!-- bootstrap end -->
 	
@@ -110,19 +110,23 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse" id="navbarResponsive" style="display: flex !important;">
           <ul class="navbar-nav ml-auto">
           <% 
           Object obj=session.getAttribute("loginInfo");
 		  if(obj == null){
 			%>
+			<!-- 
             <li class="nav-item active" id="login.jsp">
               <a class="nav-link" href="#">Login
-                <!-- <span class="sr-only">(current)</span> -->
+                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item" id="joinForm.jsp">
               <a class="nav-link" href="#">Sign up</a>
+            </li> -->
+            <li class="nav-item" id="EJjoinForm.jsp">
+              <a class="nav-link" href="#">Login/Sign up</a>
             </li>
             <%}
 			else{
@@ -145,39 +149,40 @@
     </nav>
 	<!-- Navigation end -->
 	<style>
+	.head {
+	   height: 40px;
+	}
 	.tail {
-	   height: 63.5px;
+	   height: 102px;
 	}
 	.form-control[readonly]{
 		background-color:#FFFFFF;
 	}
 	</style>
 	<div id="target" class="container">
-	<div class="tail"></div>
-	
+	<div class="head"></div>
 	<form action="review.do" method="post" name="reviewForm">
 	<input type="hidden" name="reviewhotel" value="${requestScope.reserve.hotelno }">
 	<input type="hidden" name="reviewroom" value="${requestScope.reserve.roomno }">
   <fieldset>
-    <legend>후기작성</legend><Br>
+    <h2>이용후기</h2><br>
     <div class="form-group">
       <label for="InputEmail1">이메일</label>
-      <input type="email" class="form-control" name="reviewemail" id="exampleInputEmail1" aria-describedby="emailHelp" value="${sessionScope.loginInfo.email }">
+      <input readonly type="email" class="form-control" name="reviewemail" id="exampleInputEmail1" aria-describedby="emailHelp" value="${sessionScope.loginInfo.email }">
     </div>
     <div class="form-group">
       <label for="InputWriter">작성자</label>
-      <input type="text" class="form-control" name="reviewname" id="exampleInputPassword1" value="${requestScope.reserve.bookname }">
+      <input readonly type="text" class="form-control" name="reviewname" id="exampleInputPassword1" value="${requestScope.reserve.bookname }">
     </div>
     <div class="form-group">
       <label for="InputRoom">이용방이름</label>
-      <input type="text" class="form-control" name="roomname" id="exampleInputPassword1" value="${requestScope.reserve.hotelname }">
+      <input readonly type="text" class="form-control" name="roomname" id="exampleInputPassword1" value="${requestScope.reserve.hotelname }">
     </div>
     
     
     <fieldset class="form-group">
       <label for="InputRating">평점</label>
       <input id="input-5" value="" name="score" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="xs" title="">
-      <i class="glyphicon glyphicon-star"></i>
     </fieldset>
     
     <div class="form-group">

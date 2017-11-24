@@ -23,7 +23,7 @@ public class RoomDAO {
         PreparedStatement pstmt=null;
         ResultSet rs=null;
         
-        String select="select * from rooms where hotel_no=?";
+        String select="select no, hotel_no, name, bed, FORMAT(price, 0) AS price from rooms where hotel_no=?";
         
         try {
             con=MyConnection.getConnection();
@@ -37,7 +37,7 @@ public class RoomDAO {
                 rs.getInt("hotel_no"),
                 rs.getString("name"),
                 rs.getInt("bed"),
-                rs.getInt("price")
+                rs.getString("price")
                 );
                 list.add(r);
             }

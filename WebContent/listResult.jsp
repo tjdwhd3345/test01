@@ -285,7 +285,7 @@
     <div class="tail"></div>
     
     <div class="container" style="display:block;">
-		<table class="cell" style="margin-bottom:50px; text-align:center;">
+		<table class="cell" style="margin-bottom:50px;">
 			<c:set var="seV" value="${param['searchValue']}"/>
 			<form action="detail.do" method="post" id="fd">
 			<c:forEach var="values" items="${hList2}">
@@ -308,19 +308,52 @@
 							</c:if>
 						</c:forEach>
 					</td>
+					<style>
+					.hotel-div{height:100%}
+					.hotel-info, .hotel-promotion, .hotel-teaser{
+						padding:7px 10px 7px 15px;
+						margin-bottom:15px;
+					}
+					.hotel-info span{display:block;}
+					.hotel-name{font-size:1.5rem;font-weight:700;}
+					.hotel-adr{color:#0283df;font-size:1.0rem;font-weight:400;}
+					.member-event{
+						display:inline;
+						font-size:11px;
+						font-weight:300;
+						color:#6a4ba7;
+					}
+					.pill-container {list-style:none; padding-left:0px; margin-bottom:0px;}
+					.pill-container li{display:inline;font-size:13px;font-weight:600; padding:2px 3px 2px 3px;}
+					.pill-title1{background-color:#63c355; color:#fff;}
+					.pill-content1{color:#63c355;}
+					.pill-title2{background-color:#f57c00; color:#fff;}
+					.pill-content2{color:#f57c00;}
+					</style>
 					<td class="solid" style="min-width:520px;">
-						<table align="center">
-						<tr>
-							<td>
-								${values.bplcNm}
-							</td>
-						</tr>
-							<tr><td>${values.siteWhlAddr}</td></tr>
-							<tr><td>${values.rdnWhlAddr}</td>
-						</tr>
-						</table>
+						<div class="hotel-div">
+						<div class="hotel-info">
+							<span class="hotel-name">${values.bplcNm}</span>
+							<i class="ficon ficon-pin-star" data-selenium="area-city-map"></i>
+							<span class="hotel-adr">${values.siteWhlAddr}<span>
+						</div>
+						<div class="hotel-teaser">
+							<ul class="pill-container">
+								<li class="pill-title1">이용가능</li>
+								<li class="pill-content1">주차</li>
+							</ul>
+							<ul class="pill-container">
+								<li class="pill-title2">예약옵션</li>
+								<li class="pill-content2">예약 무료 취소</li>
+							</ul>
+						</div>
+						<div class="hotel-promotion">
+							<i class="ficon ficon-10 ficon-pointsmax pricing-badges-circle-border pricing-badges-icon" data-selenium="points-max-icon"></i>
+							<span class="member-event">회원을 위한 멤버십 포인트 적립이벤트 진행중!</span>
+						</div>
+						</div>
 					</td>
-					<td class="solid" bgcolor="#FFFFFF" style="width:180px; min-width:180px;">
+					<td class="solid" bgcolor="#FFFFFF" style="text-align:center; width:180px; min-width:180px;">
 						<c:forEach var="scopri" items="${requestScope.hList3}">
 							<c:choose>
 							<c:when test="${scopri.no eq values.rowNum}">
