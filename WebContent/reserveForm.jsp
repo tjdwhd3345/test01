@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,7 +26,16 @@
     <!-- Bootstrap core JavaScript -->
     <script src="BootTestCss/vendor/jquery/jquery.min.js"></script>
     <script src="BootTestCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+      <!-- 결제모듈 api_아임포트 -->
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script>
+		//https://github.com/iamport/iamport-manual/blob/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/README.md
+		$(function(){
+			var IMP = window.IMP;
+			IMP.init('imp41470527'); //가맹점식별코드
+		});
+	</script>
+    <!-- 결제모듈 api_아임포트 끝 -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>
 	<style>
@@ -83,9 +93,68 @@
 				$('.hosearch').submit();
 			});//end click
 			
-			//예약하기 버튼 눌렀을 때
+			//진행하기 버튼 눌렀을 때
 			$("#reservebtn").click(function(){
-				$("#rsvform").submit();
+				
+				//결제모듈 api
+				IMP.request_pay({
+					pg : 'html5_inicis',	//웹표준 결제모듈
+					pay_method : 'card',	//결제방식
+					merchant_uid : 'merchant_'+ new Date().getTime(),	//고유주문번호로써, 결제된적있으면 재결제 막는 것
+					name : "${param['roomname'] }",	//주문상품명
+					amount : $('input[name=price]').val(),	//결제금액
+					buyer_email : $('input[name=useremail]').val(),	//결제자 이메일
+					buyer_name : $('input[name=username]').val(),	//결제자 이름
+					buyer_tel : '010-1234-5678',	//결제자 전화번호
+				}, function(rsp){
+					if(rsp.success){
+						//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+						jQuery.ajax({
+							url: "reserve.do",
+							type: 'POST',
+							dataType: 'json',
+							data: {
+								imp_uid : rsp.imp_uid,
+								//기타 필요한 데이터가 있으면 추가 전달
+								/*
+								username:$('input[name=username]').val(),
+								useremail:$('input[name=useremail]').val(),
+								hotelnum:$('input[name=hotelnum]').val(),
+								roomnum:$('input[name=roomnum]').val(),
+								checkIn:$('input[name=checkIn]').val(),
+								checkOut:$('input[name=checkOut]').val(),
+								price:$('input[name=price]').val(),
+								*/
+							}
+						}).done(function(data){
+							//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+							if(everythings_fine){
+								var msg = '결제가 완료되었습니다.';
+								msg += '고유ID : '+rsp.imp_uid;
+								msg += '상점 거래ID : '+rsp.merchant_uid;
+								msg += '결제 금액 : '+rsp.paid_amount;
+								msg += '카드 승인번호 : '+rsp.apply_num;
+								
+								alert(msg);
+							}else{
+								console.log(data);
+								//[3] 아직 제대로 결제가 되지 않았습니다.
+								//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+							}
+						}).fail(function(data){
+							console.log(data);
+						});
+					}else{
+						var msg = '결제에 실패하였습니다.';
+						msg += '에러내용 : '+rsp.error_msg;
+						
+						alert(msg);
+					}
+				});
+				
+				
+				
+				//$("#rsvform").submit();
 			});
 			
 		});
@@ -156,19 +225,23 @@
 			</DIV>
 		</div>
 	</div>
+	<style>
+	.roomprice{font-size: 25px;color: #ed5c59;}
+	</style>
 	<div class="tail"></div>
 	<div id="target" class="container">
-		<h5><strong>객실정보</strong></h5>	
+		<h5><strong>객실정보</strong></h5>
 		<table class="table">
 			<tr>
 				<td>객실</td><td>${param['roomname'] }</td>
 			</tr>
 			<tr>
-				<td>최대인원</td><td>${param['roombeds'] } 명</td>
+				<td>최대인원</td><td>${param['roombeds'] }</td>
 			</tr>
 			<tr>
 				<td>총 금액</td>
-				<td><span>${param['roomprice'] * nights }</span> 원 (${nights }박)</td>
+				<fmt:parseNumber var="roomprice" type="number" value="${param['roomprice'] }"/>
+				<td><span class="roomprice">${roomprice * nights }</span> 원 (${nights }박)</td>
 			</tr>
 		</table>
 	</div>
@@ -180,8 +253,8 @@
 		<input type="hidden" name="roomnum" value="${param['roomnum'] }">
 		<input type="hidden" name="checkIn" value="${checkIn }">
 		<input type="hidden" name="checkOut" value="${checkOut }">
-		<input type="hidden" name="checkOut" value="${nights }">
-		<input type="hidden" name="price" value="${param['roomprice'] * nights}">
+		<input type="hidden" name="nights" value="${nights }">
+		<input type="hidden" name="price" value="${roomprice * nights}">
 		
 		<table class="table">
 			<tr>

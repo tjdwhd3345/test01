@@ -138,19 +138,25 @@
 	<!-- Navigation end -->
 	<style>
 	table{border-collapse:collapse!important}
-	button{color:inherit;font:inherit;margin:0;
-	overflow:visible;
-	text-transform:none;
-	-webkit-appearance:button;
-	cursor:pointer;
+	button{
+		color:inherit;font:inherit;margin:0;
+		overflow:visible;
+		text-transform:none;
+		-webkit-appearance:button;
+		cursor:pointer;
 	}
 	button[disabled]{cursor:default}
 	button::-moz-focus-inner{border:0;padding:0}
-	input[type=button]{
-	cursor:pointer;
-	}
+	input[type=button]{cursor:pointer;}
 	
-	.btn{padding:8px 30px;background-color:#f0f0f0;border:1px solid #dadada;font-weight:300;font-size:.92em;color:#444;border-radius:2px}
+	.btn{
+		padding:8px 30px;
+		background-color:#f0f0f0;
+		border:1px solid #dadada;
+		font-weight:300;
+		font-size:.92em;
+		color:#444;
+		border-radius:2px}
 	.btn:active,.btn:focus{outline:0;text-decoration:none}
 	.btn.info{color:#fff;background-color:#325D88;border:1px solid #325D88}
 	.btn.info:hover{background-color:#325D88}
@@ -159,12 +165,8 @@
 	.btn.info.line:hover{color:#fff}
 	.btn.rounded{border-radius:10px}
 	
-	.head {
-	   height: 110px;
-	}
-	.tail {
-	   height: 293px;
-	}
+	.head {height: 110px;}
+	.tail {height: 293px;}
 	</style>
 	<div id="target" class="container">
 	<div class="head"></div>
@@ -172,7 +174,7 @@
 		<h3>예약목록</h3><br>
 		<table width="100%">
 			<tr align="center">
-				<th>예약번호</th><th>호텔명</th><th>체크인</th><th>체크아웃</th><th>예약일시</th><th>예약상태</th>
+				<th>예약번호</th><th style="min-width:200px; width:200px;">호텔명</th><th>체크인</th><th>체크아웃</th><th style="padding-left:14px;">예약일시</th><th>예약상태</th>
 			</tr>
 		<c:choose>
 			<c:when test="${empty rList}">
@@ -183,12 +185,12 @@
 			<c:otherwise>
 				<c:forEach var="reserve" items="${rList }">
 					<tr align="center"> 
-						<td id="bookno">${reserve.bookno }</td>
-						<td>${reserve.hotelname }</td>
-						<td>${reserve.checkIn }</td>
-						<td>${reserve.checkOut }</td>
-						<td>${reserve.reservedate }</td>
-						<td>${reserve.string_status }
+						<td id="bookno" style="min-width:73px;">${reserve.bookno }</td>
+						<td style="min-width:200px;">${reserve.hotelname }</td>
+						<td style="min-width:93px;">${reserve.checkIn }</td>
+						<td style="min-width:93px;">${reserve.checkOut }</td>
+						<td style="padding-left:14px; min-width:99px;">${reserve.reservedate }</td>
+						<td style="min-width:93px;">${reserve.string_status }
 						<c:if test="${reserve.status eq 3 }">	<!-- 3이면 이용완료 -->
 						<br><input type="button" name="reviewbtn" class="btn info line rounded" value="후기작성">
 						</c:if>

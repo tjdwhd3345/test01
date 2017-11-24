@@ -275,6 +275,19 @@
 	.btn{padding:8px 30px;background-color:#325D88;border:1px solid #325D88;font-weight:300;font-size:.92em;color:#444;border-radius:2px}
 	.btn.info{color:#fff;background-color:#325D88;border:1px solid #325D88}
 	.btn.rounded{border-radius:10px}
+	input[name=roombeds]{
+		background-color: #f5f5f5;
+		text-align:center;
+		font-size: 18px;
+		width: 150px;
+	}
+	input[name=roomprice]{
+		text-align:right;
+		background-color: #f5f5f5;
+		font-size: 25px;
+		width: 100px;
+		color: #ed5c59;
+	}
 	</style>
 	<h4><strong>객실정보</strong><img src="glyphicons/bedroom-nightstand.png"></h4>
 	<c:if test="${empty requestScope.ro }"><p> 선택한 날짜에 이용가능한 객실이 없습니다.</p></c:if>
@@ -289,6 +302,7 @@
 		 			<input type="hidden" name="hotelname" value="${param['name'] }">
 		 			<input type="hidden" name="hoteladdr" value="${param['addr'] }">
 		 			<input type="hidden" name="roomnum" value="${room.no }">
+		 			<input type="hidden" name="roomname" value="${room.name }">
 		 			<table class="" width="100%" text-align="center" vertical-align="middle" style="background-color: #f5f5f5; border:0px solid !important;">
 		 				<tr align="center">
 		 					<th>객실/투숙 공간</th><th>최대 인원</th><th colspan="2">가격</th>
@@ -300,8 +314,10 @@
 				 					<input type="hidden" name="roomimg" value="${roomimg.img }">
 			 					</c:if>
 		 					</c:forEach>
-		 					<td><input readonly type="text" name="roombeds" value="${room.beds}명" style="background-color: #f5f5f5;text-align:center;font-size: 18px;width: 150px;"></td>
-		 					<td align="right">₩<input readonly type="text" name="roomprice" align="right" value="${room.price}" style="text-align:right;background-color: #f5f5f5;font-size: 25px;width: 100px;color: #ed5c59;">원</td>
+		 					<td><input readonly type="text" name="roombeds" value="${room.beds}명"></td>
+		 					<td align="right">
+		 					₩<input readonly type="text" name="roomprice" align="right" value="${room.price}">원
+		 					</td>
 		 					<td><input type="button" value="예약" class="btn info line rounded"></td>
 		 				</tr>
 		 			</table>	

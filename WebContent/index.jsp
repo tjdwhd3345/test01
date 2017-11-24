@@ -105,7 +105,7 @@ $(function(){ //jQuery
 		
 		var $d=$('.hosearch').serialize();
 		$('.hosearch').submit();
-			
+		
 	});//end click	 
 	 
 	 

@@ -58,12 +58,14 @@ public class ReserveServlet extends HttpServlet {
 	            checkIn, 
 	            checkOut, 
 	            Integer.parseInt(price));
-	    RequestDispatcher rd=null;
+	    
+	    System.out.println(bookemail+", "+bookname+", "+hotelno+", "+roomno+", "+checkIn+", "+checkOut+", "+price);
+	    
 	    String nexturl="";
 	    try {
 	        Reserve red=new Reserve();
             red=reDAO.addReserve(r);    //book테이블에 예약추가
-            request.setAttribute("reserved", red);  
+            request.setAttribute("reserved", red);
             nexturl="reserveSuccess.jsp";   //추가 성공시
             
         } catch (SQLException e) {
@@ -74,7 +76,7 @@ public class ReserveServlet extends HttpServlet {
         }
 	    
 	    //response.sendRedirect("reserveSuccess.jsp");
-	    rd=request.getRequestDispatcher(nexturl);
+	    RequestDispatcher rd=request.getRequestDispatcher(nexturl);
 	    rd.forward(request, response);
 	    
 	}

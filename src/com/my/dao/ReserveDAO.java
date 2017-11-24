@@ -82,6 +82,7 @@ public class ReserveDAO {
     	
     	List<Reserve> rList=new ArrayList<Reserve>();
     	
+    	String updateSQL="UPDATE book SET status=3 WHERE STR_TO_DATE(check_in, '%m/%d/%Y') <= date(CURDATE()) AND book_email = ?";
     	String selectSQL="SELECT book.no, hotel.no, hotel.name, check_in, check_out, reserve_date, book.status, book_status.status FROM book" + 
     			" JOIN hotel" + 
     			" ON book.book_hotel = hotel.no" + 
@@ -92,6 +93,12 @@ public class ReserveDAO {
     	
     	try {
 			con=MyConnection.getConnection();
+			//오늘날짜와 비교해서 예약상태 업데이트
+			pstmt=con.prepareStatement(updateSQL);
+			pstmt.setString(1, email);
+			pstmt.executeUpdate();
+			
+			//이메일로 예약내역 조회
 			pstmt=con.prepareStatement(selectSQL);
 			pstmt.setString(1, email);
 			rs=pstmt.executeQuery();
