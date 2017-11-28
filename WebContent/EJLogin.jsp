@@ -24,7 +24,6 @@
     
 	<title>SIGN-IN/SIGN-UP::CHECKIN.COM</title>
 </head>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	
 	<!-- 상단 index -->
@@ -128,9 +127,10 @@
 					});
 				});//end click
 			});
-		</script><!-- login -->
+		</script>
 		
-		<script type="text/javascript"><!-- login -->
+		<!-- login -->
+		<script type="text/javascript">
 			$(function(){
 				var $form=$("#lgi");
 				var $url=$($form).attr("action");
@@ -146,7 +146,9 @@
 				    	if(jsonObj.msg == 1) {
 							msg ="로그인 성공";
 				    		//$(location).attr("href", "index.jsp");
-				    		window.history.back();
+				    		//window.history.back();
+				    		//window.location.replace("index.jsp");
+				    		
 						} else {
 							msg ="아이디 또는 비밀번호를 확인해주세요.";
 						}
@@ -164,9 +166,11 @@
 					return false;	//기본 이벤트 처리 막기
 				});
 			});
-		</script><!-- login -->
+		</script>
+		<!-- login end -->
 		
-		<script><!--   sign up -->
+		<!-- sign up -->
+		<script>
 		<!--jQuery-->
 		$(function(){
 			var idCheckFlag=false;
@@ -221,12 +225,30 @@
 				}
 			});
 		});
-		</script><!-- sign up -->
+		</script>
+		<!-- sign up end-->
 		
 		<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 		<link rel="stylesheet" href="EJcss/style.css">
 	
-	
+	<!-- 네아로 시작해보자 -->
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<!-- 네이버아디디로로그인 초기화 Script -->
+	<script type="text/javascript">
+	$(function(){
+		var naverLogin = new naver.LoginWithNaverId(
+				{
+					clientId: "5CumGJVMJyZ2nBi_0uRn",
+					callbackUrl: "http://192.168.0.141:8080/test01/callback.jsp",
+					isPopup: true, /* 팝업을 통한 연동처리 여부 */
+					loginButton: {color: "white", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+				}
+			);
+			
+			/* 설정정보를 초기화하고 연동을 준비 */
+			naverLogin.init();
+	});
+	</script>
 
 <body>
 
@@ -245,6 +267,11 @@
 	.top {
 	   height: 130px;
 	}
+	#naverIdLogin{
+  		width:260px; height:36px;
+  		text-align: center; margin: 0 auto;
+  		cursor:pointer;
+  	}
 	</style>
 	<div class="top"></div>
 	<p class="tip"></p>
@@ -265,6 +292,9 @@
 		</label>
 	
 		<Button type="submit" value="Login" class="submit">Login</button>
+		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+		<div id="naverIdLogin">
+		</div>
 		</form>
 	</div><!-- form sign-in 끝 -->
   

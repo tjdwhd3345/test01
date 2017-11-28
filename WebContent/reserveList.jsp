@@ -120,7 +120,7 @@
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getName() %>님</li>
             <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약조회</a>
             </li>
@@ -179,7 +179,7 @@
 		<c:choose>
 			<c:when test="${empty rList}">
 			<tr align="center">
-				<td colspan="5">예약내역이 없습니다.</td>
+				<td colspan="6">예약내역이 없습니다.</td>
 			</tr>
 			</c:when>
 			<c:otherwise>

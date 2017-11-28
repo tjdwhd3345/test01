@@ -99,4 +99,14 @@
     <servlet-name>ReviewServlet</servlet-name>
     <url-pattern>/review.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SnsLoginServlet</display-name>
+    <servlet-name>SnsLoginServlet</servlet-name>
+    <servlet-class>control.SnsLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SnsLoginServlet</servlet-name>
+    <url-pattern>/sns.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -113,7 +113,7 @@
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getName() %>님</li>
             <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약조회</a>
             </li>
@@ -184,7 +184,7 @@
 	</style>
 	<div class="tail"></div>
 	<!-- Footer -->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark" style="margin-top:277px;">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
       </div>

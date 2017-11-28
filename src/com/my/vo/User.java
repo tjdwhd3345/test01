@@ -6,14 +6,17 @@ public class User {
     private String pwd;
     private String name;
     private String tel;
+    private String id;
     
-    
-    public User(String email, String pwd, String name) {
+    public User(String email, String name) {
         this.email = email;
-        this.pwd = pwd;
         this.name = name;
     }
-    
+    public User(String email, String name, String id) {
+        this.email = email;
+        this.name = name;
+        this.id = id;
+    }
     public User(String email, String pwd, String name, String tel) {
         this.email = email;
         this.pwd = pwd;
@@ -21,6 +24,13 @@ public class User {
         this.tel = tel;
     }
 
+    
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getEmail() {
         return email;
     }

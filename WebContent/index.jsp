@@ -45,6 +45,7 @@ $(function(){ //jQuery
 					url: $url,
 					method : 'GET',
 					success : function(responseData){
+						if($url == undefined)	return;
 						if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 							//location.href="index.jsp";
 							location.reload();
@@ -163,7 +164,7 @@ input {
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getName() %>님</li>
             <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약조회</a>
             </li>

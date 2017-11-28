@@ -63,9 +63,7 @@ public class ReviewDAO {
         
         List<Review> rvList=new ArrayList<Review>();
         
-        String selectSQL="SELECT re.review_name, b.book_email, ro.name, score, content, review_date FROM hotel_review re " + 
-                "JOIN book b " + 
-                "ON re.review_room = b.book_room " + 
+        String selectSQL="SELECT re.review_name, ro.name, score, content, review_date FROM hotel_review re " + 
                 "JOIN rooms ro " + 
                 "ON re.review_room = ro.no " + 
                 "WHERE re.review_hotel = ? ";
@@ -77,7 +75,6 @@ public class ReviewDAO {
             while(rs.next()) {
                 Review rv=new Review(
                         rs.getString("re.review_name"), 
-                        rs.getString("b.book_email"),
                         rs.getString("ro.name"),
                         rs.getString("content"),
                         rs.getString("score"),

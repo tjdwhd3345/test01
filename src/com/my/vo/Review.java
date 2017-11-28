@@ -23,9 +23,8 @@ public class Review {
         this.content = content;
         this.score = score;
     }
-    public Review(String reviewname, String reviewemail, String roomname, String content, String score, Date reviewdate) {
+    public Review(String reviewname, String roomname, String content, String score, Date reviewdate) {
         this.reviewname = reviewname;
-        this.reviewemail = reviewemail;
         this.roomname = roomname;
         this.content = content;
         this.score = score;

@@ -65,6 +65,7 @@
 							url: $url,
 							method : 'GET',
 							success : function(responseData){
+								if($url == undefined)	return;
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 									//location.href="index.jsp";
 									location.reload();
@@ -180,7 +181,7 @@
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getName() %>님</li>
             <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약조회</a>
             </li>
@@ -344,9 +345,14 @@
 		var $btn=$('input[type=button]');
 		$($btn).click(function(){
 			<c:choose>
-				<c:when test="${empty sessionScope.loginInfo }">
+				<c:when test="${empty sessionScope.loginInfo}">
 					alert("로그인이 필요합니다");
 					location.href="EJLogin.jsp";
+				</c:when>
+				<c:when test="${empty sessionScope.checkIn and empty sessionScope.checkOut}">
+					alert("날짜를 선택해주세요.");
+					alert("처음부터 다시 진행해주십시오.");
+					location.href="index.jsp";
 				</c:when>
 				<c:otherwise>
 					//alert('aaa');

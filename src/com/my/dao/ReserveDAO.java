@@ -82,14 +82,14 @@ public class ReserveDAO {
     	
     	List<Reserve> rList=new ArrayList<Reserve>();
     	
-    	String updateSQL="UPDATE book SET status=3 WHERE STR_TO_DATE(check_in, '%m/%d/%Y') <= date(CURDATE()) AND book_email = ?";
+    	String updateSQL="UPDATE book SET status=3 WHERE STR_TO_DATE(check_out, '%m/%d/%Y') <= date(CURDATE()) AND book_email = ?";
     	String selectSQL="SELECT book.no, hotel.no, hotel.name, check_in, check_out, reserve_date, book.status, book_status.status FROM book" + 
     			" JOIN hotel" + 
     			" ON book.book_hotel = hotel.no" + 
     			" JOIN book_status" + 
     			" ON book.status = book_status.num" +
     			" WHERE book.book_email = ?" + 
-    			" ORDER BY check_in";
+    			" ORDER BY book.no desc";
     	
     	try {
 			con=MyConnection.getConnection();

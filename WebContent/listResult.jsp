@@ -39,6 +39,15 @@
 	<!-- <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css"> -->
 	<!-- 달력 css 끝 -->
 	
+	<!-- paging -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#paging').DataTable();
+		} );
+	</script>
+	<script type="text/javascript" src="http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js" ></script>
+	<script type="text/javascript" src="http://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" ></script>
+	<!-- paging End -->
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Hotel List</title>
@@ -100,6 +109,7 @@
 							url: $url,
 							method : 'GET',
 							success : function(responseData){
+								if($url == undefined)	return;
 								if($url == 'logout.do'){	//로그아웃메뉴를 클릭하여 응답 후
 									//location.href="index.jsp";
 									location.reload();
@@ -211,7 +221,7 @@
 			else{
 				User u=(User) obj;
             %>
-            <li class="nav-link"><%=u.getEmail() %>님</li>
+            <li class="nav-link"><%=u.getName() %>님</li>
             <li class="nav-item" id="reserveList.do">
               <a class="nav-link" href="#">예약확인</a>
             </li>
@@ -281,13 +291,40 @@
     	 border-spacing:0px 20px;
     }
     .solid{border:1px solid #ddd;}
+    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	    z-index: 2;
+	    color: #fff;
+	    cursor: default;
+	    background-color: #325D88;
+	    border-color: #325D88;
+	}
+	.pagination>li>a, .pagination>li>span {
+	    position: relative;
+	    float: left;
+	    padding: 6px 12px;
+	    margin-left: -1px;
+	    line-height: 1.42857143;
+	    color: #337ab7;
+	    text-decoration: none;
+	    background-color: #fff;
+	    border: 1px solid #ddd;
+	}
+	
     </style>
     <div class="tail"></div>
     
     <div class="container" style="display:block;">
-		<table class="cell" style="margin-bottom:50px;">
+		<table class="cell" style="margin-bottom:50px;" id="paging">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
 			<c:set var="seV" value="${param['searchValue']}"/>
 			<form action="detail.do" method="post" id="fd">
+			<tbody>
 			<c:forEach var="values" items="${hList2}">
 				<%-- 검색 키워드가 장소인지 이름인지 --%>
 				<c:choose>
@@ -300,7 +337,7 @@
 				</c:choose>
 				<%-- 검색 키워드를 포함한 호텔만 출력 --%>
 				<c:if test="${fn:contains(site, seV)}">
-			<tr class="shadow" bgcolor="#F7F7F7"; style="border:1px solid #ddd; cursor:pointer;" onclick="window.open('detail.do?num=${values.rowNum}&name=${values.bplcNm}&x=${values.x}&y=${values.y}&addr=${values.siteWhlAddr}')">
+				<tr class="shadow" bgcolor="#F7F7F7"; style="border:1px solid #ddd; cursor:pointer;" onclick="window.open('detail.do?num=${values.rowNum}&name=${values.bplcNm}&x=${values.x}&y=${values.y}&addr=${values.siteWhlAddr}')">
 					<td class="solid" style="margin:0px; padding:0px;">
 						<c:forEach var="himg" items="${requestScope.hList3}">
 							<c:if test="${himg.no eq values.rowNum}">
@@ -363,9 +400,10 @@
 							</c:choose>
 						</c:forEach>
 					</td>
-			</tr>
+					</tr>
 				</c:if>
 			</c:forEach>
+			</tbody>
 			</form>
 		</table>
 		<style>
